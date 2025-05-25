@@ -7,6 +7,7 @@ from dict_parser import fetch_csv_rows_from_dict
 
 
 def retrieve_quotes_data(ticker, date, destination_folder):
+
     file_name = "{}_{}_daily_quotes.csv".format(ticker, date)
     full_path = Path(destination_folder) / file_name
     str_full_path = str(full_path)
