@@ -6,7 +6,7 @@ def adjust_datetime(expression):
 
 
 def fetch_csv_rows_from_dict(parsed_data_as_dict):
-
+    # TO DO
     quotes = parsed_data_as_dict['quotes']
     lst = []
 

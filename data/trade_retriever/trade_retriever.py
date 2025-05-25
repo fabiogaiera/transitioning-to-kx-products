@@ -8,7 +8,7 @@ from dict_parser import fetch_csv_rows_from_dict
 
 def retrieve_trades_data(ticker, date, destination_folder):
 
-    file_name = "{}_{}.csv".format(ticker, date)
+    file_name = "{}_{}_daily_trades.csv".format(ticker, date)
     full_path = Path(destination_folder) / file_name
     str_full_path = str(full_path)
 
