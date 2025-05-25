@@ -14,9 +14,7 @@ headers = {
 }
 
 
-def get_response(symbol, date, next_page_token=None):
-
-    base_url = f"https://data.alpaca.markets/v2/stocks/{symbol}/quotes"
+def get_response(base_url, date, next_page_token=None):
 
     url_with_params = URLComposer(base_url, date)
 

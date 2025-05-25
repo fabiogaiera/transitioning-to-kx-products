@@ -2,7 +2,7 @@ import csv
 import sys
 from pathlib import Path
 
-from api_client import get_response
+from data.api_client import get_response
 from dict_parser import fetch_csv_rows_from_dict
 
 
