@@ -15,7 +15,7 @@ def retrieve_quotes_data(ticker, date, destination_folder):
     with open(str_full_path, 'w', newline='') as file:
 
         writer = csv.writer(file)
-        first_row = [None, None, None, None]
+        first_row = ["datetime", "sym", "bid_price", "bid_size", "ask_price", "ask_size"]
         writer.writerow(first_row)
 
         next_page_token = None
@@ -51,6 +51,6 @@ See https://alpaca.markets to get an API key and its corresponding secret
 if __name__ == "__main__":
 
     if len(sys.argv) != 4:
-        print("Usage: python trades_data_retriever.py <ticker> <yyyy-MM-dd> </path/to/folder>")
+        print("Usage: python quote_retriever.py <ticker> <yyyy-MM-dd> </path/to/folder>")
         sys.exit(1)
     retrieve_quotes_data(sys.argv[1], sys.argv[2], sys.argv[3])
