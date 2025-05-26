@@ -8,8 +8,8 @@ from alpaca_rest_client.url_composer import URLComposer
 headers = {
 
     "accept": "application/json",
-    "APCA-API-KEY-ID": os.getenv("API-KEY"),
-    "APCA-API-SECRET-KEY": os.getenv("API-SECRET")
+    "APCA-API-KEY-ID": os.getenv("API_KEY"),
+    "APCA-API-SECRET-KEY": os.getenv("API_SECRET")
 
 }
 
