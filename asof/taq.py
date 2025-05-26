@@ -5,10 +5,14 @@ import pykx as kx
 
 
 def as_of(csv_file_path_1, csv_file_path_2):
+
     trades = kx.q.read.csv(csv_file_path_1, 'PSFJ')
-    quotes = kx.q.read.csv(csv_file_path_2, 'PSFJFJ')
+    quotes = kx.q.read.csv(csv_file_path_2, 'SFJFJP')
     print(trades)
     print(quotes)
+
+    # Fix it
+    kx.q.asof(trades, quotes)
 
 
 if __name__ == "__main__":
