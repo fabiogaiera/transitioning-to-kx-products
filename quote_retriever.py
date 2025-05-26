@@ -2,8 +2,8 @@ import csv
 import sys
 from pathlib import Path
 
-from data.api_client import get_response
-from data.dict_parser import fetch_csv_rows_from_dict_quotes
+from alpaca_rest_client.api_client import get_response
+from alpaca_rest_client.dict_parser import fetch_csv_rows_from_quotes_dict
 
 
 def retrieve_quotes_data(symbol, date, destination_folder):
@@ -27,7 +27,7 @@ def retrieve_quotes_data(symbol, date, destination_folder):
             if first_iteration:
 
                 parsed_data, next_page_token = get_response(base_url, date)
-                rows = fetch_csv_rows_from_dict_quotes(parsed_data)
+                rows = fetch_csv_rows_from_quotes_dict(parsed_data)
                 writer.writerows(rows)
                 next_page_token = parsed_data['next_page_token']
                 first_iteration = False
@@ -35,7 +35,7 @@ def retrieve_quotes_data(symbol, date, destination_folder):
             else:
 
                 parsed_data, next_page_token = get_response(base_url, date, next_page_token)
-                rows = fetch_csv_rows_from_dict_quotes(parsed_data)
+                rows = fetch_csv_rows_from_quotes_dict(parsed_data)
                 writer.writerows(rows)
                 next_page_token = parsed_data['next_page_token']
 

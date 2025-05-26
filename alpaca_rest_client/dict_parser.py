@@ -6,7 +6,7 @@ def adjust_datetime(expression):
     return expression
 
 
-def fetch_csv_rows_from_dict_quotes(parsed_data_as_dict):
+def fetch_csv_rows_from_quotes_dict(parsed_data_as_dict):
 
     symbol = parsed_data_as_dict['symbol']
     quotes = parsed_data_as_dict['quotes']
@@ -21,7 +21,7 @@ def fetch_csv_rows_from_dict_quotes(parsed_data_as_dict):
     return lst
 
 
-def fetch_csv_rows_from_dict_trades(parsed_data_as_dict):
+def fetch_csv_rows_from_trades_dict(parsed_data_as_dict):
 
     symbol = parsed_data_as_dict['symbol']
     trades = parsed_data_as_dict['trades']
