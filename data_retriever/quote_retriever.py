@@ -7,7 +7,6 @@ from alpaca_rest_client.dict_parser import fetch_csv_rows_from_quotes_dict
 
 
 def retrieve_quotes_data(symbol, date, destination_folder):
-
     file_name = "{}_{}_daily_quotes.csv".format(symbol, date)
     full_path = Path(destination_folder) / file_name
     str_full_path = str(full_path)
@@ -16,7 +15,7 @@ def retrieve_quotes_data(symbol, date, destination_folder):
     with open(str_full_path, 'w', newline='') as file:
 
         writer = csv.writer(file)
-        first_row = ["sym", "bid_price", "bid_size", "ask_price", "ask_size", "datetime"]
+        first_row = ["datetime", "sym", "bid_price", "bid_size", "ask_price", "ask_size"]
         writer.writerow(first_row)
 
         next_page_token = None
