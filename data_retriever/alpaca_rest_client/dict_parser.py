@@ -1,5 +1,4 @@
 def adjust_datetime(expression):
-
     expression = expression.replace('Z', '').replace('-', '.').replace('T', 'D')
     if len(expression) < 29:
         expression = expression.ljust(29, '0')
