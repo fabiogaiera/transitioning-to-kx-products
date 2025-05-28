@@ -20,6 +20,8 @@ def create_histogram(csv_file_path):
     # kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
     trades = kx.q.read.csv(csv_file_path, 'PSFJ')
 
+    # Is trades table keyed?
+
     # Execute a qSQL query using xbar to bucket the minutes into hours
     # trades_table = kx.q('select count i by 60 xbar datetime.minute from trades')
     trades_table = trades.select(kx.Column('i').count(), by=kx.Column('datetime').minute.xbar(60))
