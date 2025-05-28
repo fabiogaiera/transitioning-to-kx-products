@@ -20,14 +20,15 @@ def as_of_q(csv_file_path_1, csv_file_path_2):
     kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path_1}"')
     kx.q(f'quotes: ("PSFJFJ";enlist ",") 0: `$":{csv_file_path_2}"')
     kx.q('quotes: `datetime`sym xkey quotes')
-    # kx.q('show aj[`sym`datetime;trades;quotes]')
+    kx.q('aj[`sym`datetime;trades;quotes]')
 
 
 @timed
 def as_of_python(csv_file_path_1, csv_file_path_2):
     trades = kx.q.read.csv(csv_file_path_1, 'PSFJ')
     quotes = kx.q.read.csv(csv_file_path_2, 'PSFJFJ')
-    # print(kx.q.aj(kx.SymbolVector(['sym', 'datetime']), trades, quotes))
+    quotes = kx.q.xkey(['sym', 'datetime'], quotes)
+    kx.q.aj(kx.SymbolVector(['sym', 'datetime']), trades, quotes)
 
 
 if __name__ == "__main__":
