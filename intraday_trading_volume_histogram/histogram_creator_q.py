@@ -17,10 +17,10 @@ datetime,sym,price,size
 def create_histogram(csv_file_path):
 
     # Upload a CSV file into a kdb+ table
-    trades = kx.q.read.csv(csv_file_path, 'PSFJ')
+    kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
 
     # Execute a qSQL query using xbar to bucket the minutes into hours
-    trades_table = trades.select(kx.Column('i').count(), by=kx.Column('datetime').minute.xbar(60))
+    trades_table = kx.q('select count i by 60 xbar datetime.minute from trades')
 
     # Seamless integration with existent Python code (pandas and Matplotlib libraries)
 
@@ -44,6 +44,6 @@ def create_histogram(csv_file_path):
 if __name__ == "__main__":
 
     if len(sys.argv) != 2:
-        print("Usage: python histogram_creator.py </path/to/file/trades.csv>")
+        print("Usage: python histogram_creator_q.py </path/to/file/trades.csv>")
         sys.exit(1)
     create_histogram(sys.argv[1])
