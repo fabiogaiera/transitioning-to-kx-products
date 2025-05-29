@@ -25,17 +25,22 @@ def create_histogram(csv_file_path):
 
     # Transform to a pandas.DataFrame instance
     df = trades_table.pd()
+    print(df)
 
-    fig, ax = plt.subplots()
+    # Set window title using a temporary figure
+    fig = plt.figure()
     fig.canvas.manager.set_window_title("Intraday Analysis")
 
+    # Aggregate and plot
     volume_by_time = df.groupby('datetime')['i'].sum()
-    volume_by_time.plot(kind='bar', ax=ax)
+    volume_by_time.plot(kind='bar')
 
-    ax.set_title("Intraday Trading Volume Histogram")
-    ax.set_xlabel('Hour')
-    ax.set_ylabel('Total Size')
+    # Set labels and title using plt (global interface)
+    plt.title("Intraday Trading Volume Histogram")
+    plt.xlabel("Hour")
+    plt.ylabel("Total Size")
 
+    # Style tweaks
     plt.grid(True)
     plt.tight_layout()
     plt.show()
