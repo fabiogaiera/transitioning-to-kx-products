@@ -25,6 +25,7 @@ def create_histogram(csv_file_path):
 
     # Transform to a pandas.DataFrame instance
     df = trades_table.pd()
+    print(df)
 
     # Set window title using a temporary figure
     fig = plt.figure()
