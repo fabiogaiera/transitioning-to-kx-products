@@ -15,7 +15,6 @@ datetime,sym,price,size
 
 
 def create_histogram(csv_file_path):
-
     # Upload a CSV file into a kdb+ table
     trades = kx.q.read.csv(csv_file_path, 'PSFJ')
 
@@ -26,18 +25,19 @@ def create_histogram(csv_file_path):
 
     # Transform to a pandas.DataFrame instance
     df = trades_table.pd()
-    # print(type(df))
 
     fig, ax = plt.subplots()
+    fig.canvas.manager.set_window_title("Intraday Analysis")
 
-    df.groupby('datetime')['i'].sum().plot(kind='bar', ax=ax)
+    volume_by_time = df.groupby('datetime')['i'].sum()
+    volume_by_time.plot(kind='bar', ax=ax)
 
     ax.set_title("Intraday Trading Volume Histogram")
     ax.set_xlabel('Hour')
     ax.set_ylabel('Total Size')
 
-    fig.canvas.manager.set_window_title("Intraday Analysis")
-
+    plt.grid(True)
+    plt.tight_layout()
     plt.show()
 
 
