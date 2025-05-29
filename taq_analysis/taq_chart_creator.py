@@ -14,6 +14,7 @@ def retrieve_taq_dataframe(csv_file_path_1, csv_file_path_2):
     quotes = kx.q.xkey(['sym', 'datetime'], quotes)
     # As-Of Join
     taq_table = kx.q.aj(kx.SymbolVector(['sym', 'datetime']), trades, quotes)
+    # Convert to pandas DataFrame
     return taq_table.pd()
 
 
