@@ -21,7 +21,7 @@ def retrieve_taq_dataframe(csv_file_path_1, csv_file_path_2):
 if __name__ == "__main__":
 
     if len(sys.argv) != 3:
-        print("Usage: python asof.py </path/to/file/trades.csv> </path/to/file/quotes.csv>")
+        print("Usage: python tag_chart_creator.py </path/to/file/trades.csv> </path/to/file/quotes.csv>")
         sys.exit(1)
 
     taq_df = retrieve_taq_dataframe(sys.argv[1], sys.argv[2])
