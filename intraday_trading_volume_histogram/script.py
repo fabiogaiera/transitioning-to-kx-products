@@ -1,7 +1,7 @@
 import sys
 
-from trades_dataframe_creator import create_dataframe
-from volumes_histogram_creator import create_histogram
+from intraday_trading_volume_histogram.python.trades_dataframe_creator import create_dataframe
+from intraday_trading_volume_histogram.python.volumes_histogram_creator import create_histogram
 
 if __name__ == "__main__":
 

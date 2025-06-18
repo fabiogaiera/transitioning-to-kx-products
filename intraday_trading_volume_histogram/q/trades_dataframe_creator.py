@@ -11,12 +11,10 @@ datetime,sym,price,size
 
 def create_dataframe(csv_file_path):
     # Upload a CSV file into a kdb+ table
-    trades = kx.q.read.csv(csv_file_path, 'PSFJ')
+    kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
 
     # Execute a qSQL query using xbar to bucket the minutes into hours
-    trades_table = trades.select(kx.Column('i').count(), by=kx.Column('datetime').minute.xbar(60))
-
-    # Seamless integration with existent Python code (pandas and Matplotlib libraries)
+    trades_table = kx.q('select trade_count:count i by time:60 xbar datetime.minute from trades')
 
     # Transform to a pandas.DataFrame instance
     df = trades_table.pd()
