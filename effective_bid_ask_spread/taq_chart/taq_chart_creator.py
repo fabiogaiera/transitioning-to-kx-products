@@ -4,14 +4,6 @@ import matplotlib.pyplot as plt
 
 from taq_dataframe_creator import retrieve_taq_dataframe_pykx
 
-"""
-CSV format example
-datetime,sym,price,size
-2025.05.05D08:00:00.009039359,IBM,244.56,10
-2025.05.05D08:00:00.156501572,IBM,243,8
-2025.05.05D08:00:00.156579644,IBM,244.03,6
-"""
-
 
 def create_taq_chart(df):
     # Set the DataFrame index
