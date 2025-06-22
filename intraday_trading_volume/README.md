@@ -1,3 +1,5 @@
+# Intraday Trading Volume Histogram
+
 While migrating tick data from OneTick to kdb+, one of the more straightforward aspects is handling raw trade and quote
 data. This is because such data can often be re-sourced from market data providers. Therefore, the main focus during
 migration lies in rethinking the architecture of the data analytics platform itself.
