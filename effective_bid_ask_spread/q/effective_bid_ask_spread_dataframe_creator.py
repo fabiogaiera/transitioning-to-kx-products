@@ -1,6 +1,6 @@
 import pykx as kx
 
-from effective_bid_ask_spread.benckmark_util import log_execution_time
+from effective_bid_ask_spread.benchmark_util import log_execution_time
 
 """
 CSV format example for trades
