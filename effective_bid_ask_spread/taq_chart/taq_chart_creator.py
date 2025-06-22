@@ -1,8 +1,4 @@
-import sys
-
 import matplotlib.pyplot as plt
-
-from taq_dataframe_creator import retrieve_taq_dataframe_pykx
 
 
 def create_taq_chart(df):
@@ -23,14 +19,3 @@ def create_taq_chart(df):
     plt.grid(True)
     plt.tight_layout()
     plt.show()
-
-
-if __name__ == "__main__":
-
-    if len(sys.argv) != 3:
-        print("Usage: python tag_chart_creator.py </path/to/file/trades.csv> </path/to/file/quotes.csv>")
-        sys.exit(1)
-
-    data_frame = retrieve_taq_dataframe_pykx(sys.argv[1], sys.argv[2])
-    # data_frame = retrieve_taq_dataframe_q(sys.argv[1], sys.argv[2])
-    create_taq_chart(data_frame)

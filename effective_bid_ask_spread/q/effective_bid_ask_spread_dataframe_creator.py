@@ -21,7 +21,7 @@ datetime,sym,bid_price,bid_size,ask_price,ask_size
 
 
 @log_execution_time
-def retrieve_taq_dataframe_q(csv_file_path_1, csv_file_path_2):
+def retrieve_effective_bid_ask_spread_dataframe(csv_file_path_1, csv_file_path_2):
     # Upload CSV files into kdb+ tables
     kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path_1}"')
     kx.q(f'quotes: ("PSFJFJ";enlist ",") 0: `$":{csv_file_path_2}"')
@@ -32,9 +32,9 @@ def retrieve_taq_dataframe_q(csv_file_path_1, csv_file_path_2):
     # As-Of Join between trades and quotes tables
     kx.q('taq_table: aj[`sym`datetime;trades;quotes]')
 
-    # Filter TAQ data considering only market hours TO DO!
+    # TODO: Filter TAQ data considering only market hours
 
-    # Calculate effective bid-ask spread here TO DO!
+    # TODO: Calculate effective bid-ask spread here
     effective_bid_ask_spread_table = kx.q('...')
 
     # Convert to pandas DataFrame
