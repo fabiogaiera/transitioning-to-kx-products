@@ -66,7 +66,7 @@ def create_histogram(df):
     plt.show()
 ```
 
-Potential enhancements for this use case:
+## Potential enhancements for this use case:
 
 - In real-world scenarios, kdb+ tables are partitioned. This allows to achieve an optimal performance when storing /
   retrieving kdb+ data.
@@ -74,11 +74,11 @@ Potential enhancements for this use case:
 - Consider building a kdb+tick architecture when creating a real-time database and historical
   database with tick data.
 
-Alpaca Trading API Documentation (Required in case you want to download market data)
+## Alpaca Trading API Documentation (Required in case you want to download market data)
 
 Historical trades (single symbol): [Stock Trades](https://docs.alpaca.markets/reference/stocktradesingle-1)
 
-KX Documentation
+## KX Documentation
 
 Database and Programming Language: [kdb+ and q](https://code.kx.com/q)
 
