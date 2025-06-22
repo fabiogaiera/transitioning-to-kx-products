@@ -1,57 +1,16 @@
-TAQ (Trades and Quotes) analysis involves working with high-frequency financial market data to study the behavior of
-trades and quotes for financial instruments (like stocks, options, or futures). This data is extremely granular and
-timestamped to the millisecond or microsecond level. TAQ analysis is essential in finance for research, trading strategy
-development, market microstructure studies, and regulatory compliance.
+# Effective Bid-Ask Spread
 
-Here’s a breakdown of what can be done in TAQ analysis:
+**Alpaca Trading API Documentation (Required in case you want to download market data)**
 
-1. Market Microstructure Analysis
+Historical trades (single symbol): [Stock Trades](https://docs.alpaca.markets/reference/stocktradesingle-1)  
+Historical quotes (single symbol): [Stock Quotes](https://docs.alpaca.markets/reference/stockquotesingle-1)
 
-    * Bid-ask spread dynamics
-    * Quote revisions and quote lifetimes
-    * Order book depth estimation from top-of-book quotes
-    * Price impact of trades (market impact)
+**KX Documentation**
 
-2. Trade Classification
+Database and Programming Language: [kdb+ and q](https://code.kx.com/q)
 
-    * Use algorithms like Lee-Ready or Tick Rule to infer whether a trade was buyer- or seller-initiated.
-    * Helps in analyzing market aggressiveness and liquidity provision.
+Python interface library: [PyKX](https://code.kx.com/pykx)
 
-3. Algorithmic Trading & Strategy Development
+**OneTick Documentation**
 
-    * Statistical arbitrage
-    * Market making
-    * Momentum or mean reversion
-    * Order execution algorithms (e.g., VWAP, TWAP)
-
-4. Intraday Market Behavior
-
-    * Volume profiles by time
-    * Volatility clustering
-    * Price efficiency
-    * Latency arbitrage opportunities
-
-5. Liquidity Analysis
-
-    * Changes in bid/ask sizes
-    * Quote update frequency
-    * Trade volume and frequency
-
-6. Slippage and Execution Cost Analysis
-
-    * Measure implementation shortfall
-    * Analyze slippage from quote to execution
-    * Evaluate transaction cost models
-
-7. Regulatory and Surveillance Use
-
-    * Detect insider trading or market manipulation
-    * Conduct the best execution analysis
-    * Monitor for quote stuffing, spoofing, or layering
-
-8. Event Studies
-
-   * Earnings announcements
-   * Macroeconomic data releases
-   * News events
-   * Market opening and closing auctions
+As Of (Prevailing): [As Of Join](https://sql.docs.sol.onetick.com/asof.html)  
