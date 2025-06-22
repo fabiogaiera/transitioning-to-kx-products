@@ -1,7 +1,9 @@
+# Import necessary libraries
+
 import pykx as kx
 
 """
-CSV format example
+CSV format example for trades
 datetime,sym,price,size
 2025.05.05D08:00:00.009039359,IBM,244.56,10
 2025.05.05D08:00:00.156501572,IBM,243,8
