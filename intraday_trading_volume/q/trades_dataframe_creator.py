@@ -17,5 +17,4 @@ def create_dataframe(csv_file_path):
     trades_table = kx.q('select trade_count:count i by time:60 xbar datetime.minute from trades')
 
     # Transform to a pandas.DataFrame instance
-    df = trades_table.pd()
-    return df
+    return trades_table.pd()
