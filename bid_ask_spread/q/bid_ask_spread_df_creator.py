@@ -1,6 +1,6 @@
 import pykx as kx
 
-from effective_bid_ask_spread.benchmark_util import log_execution_time
+from bid_ask_spread.benchmark_util import log_execution_time
 
 """
 CSV format example for trades
@@ -21,7 +21,7 @@ datetime,sym,bid_price,bid_size,ask_price,ask_size
 
 
 @log_execution_time
-def retrieve_effective_bid_ask_spread_dataframe(csv_file_path_1, csv_file_path_2):
+def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2):
     # Upload CSV files into kdb+ tables
     kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path_1}"')
     kx.q(f'quotes: ("PSFJFJ";enlist ",") 0: `$":{csv_file_path_2}"')

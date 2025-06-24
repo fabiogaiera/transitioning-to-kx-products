@@ -1,6 +1,6 @@
 import pykx as kx
 
-from effective_bid_ask_spread.benchmark_util import log_execution_time
+from bid_ask_spread.benchmark_util import log_execution_time
 
 """
 CSV format example for trades
@@ -21,7 +21,7 @@ datetime,sym,bid_price,bid_size,ask_price,ask_size
 
 
 @log_execution_time
-def retrieve_effective_bid_ask_spread_dataframe(csv_file_path_1, csv_file_path_2):
+def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2, market_open, market_close):
     # Upload CSV files into kdb+ tables
     trades = kx.q.read.csv(csv_file_path_1, 'PSFJ')
     quotes = kx.q.read.csv(csv_file_path_2, 'PSFJFJ')
@@ -32,10 +32,16 @@ def retrieve_effective_bid_ask_spread_dataframe(csv_file_path_1, csv_file_path_2
     # As-Of Join between trades and quotes tables
     taq_table = kx.q.aj(kx.SymbolVector(['sym', 'datetime']), trades, quotes)
 
-    # TODO: Filter TAQ data considering only market hours
+    # Filter TAQ data considering only market hours in UTC
+    filtered_taq_table = taq_table.select(
+        where=(
+                (kx.Column('datetime') >= kx.q(market_open)) &
+                (kx.Column('datetime') <= kx.q(market_close))
+        )
+    )
 
     # TODO: Calculate effective bid-ask spread here
-    effective_bid_ask_spread_table = taq_table.select(...)
+    effective_bid_ask_spread_table = filtered_taq_table.select(...)
 
     # Convert to pandas DataFrame
     return effective_bid_ask_spread_table.pd()
