@@ -1,6 +1,6 @@
 import pykx as kx
 
-from effective_bid_ask_spread.benchmark_util import log_execution_time
+from bid_ask_spread.benchmark_util import log_execution_time
 
 
 @log_execution_time

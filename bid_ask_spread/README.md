@@ -1,4 +1,4 @@
-# Effective Bid-Ask Spread
+# Bid-Ask Spread
 
 **Alpaca Trading API Documentation (Required in case you want to download market data)**
 
