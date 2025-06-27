@@ -43,6 +43,7 @@ def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2, market_open, ma
     filtered_taq_table = filtered_taq_table.update(
         kx.Column('difference', value=kx.Column('bid_price') - kx.Column('ask_price')))
 
+    # Other way to calculate bid-ask spread
     # filtered_taq_table['difference'] = filtered_taq_table['bid_price'] - filtered_taq_table['ask_price']
 
     # Convert to pandas DataFrame
