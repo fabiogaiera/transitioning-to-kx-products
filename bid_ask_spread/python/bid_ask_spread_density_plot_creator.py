@@ -1,24 +1,21 @@
-# volumes_histogram_creator.py
-
-# Import necessary libraries
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
-def create_histogram(df):
+def create_density_plot(df):
     # Create a new figure object
     fig = plt.figure()
 
     # Set the window title of the figure (only works in some GUI backends)
     fig.canvas.manager.set_window_title("Intraday Analysis")
 
-    # Aggregate and plot
-    volume_by_time = df.groupby('time')['trade_count'].sum()
-    volume_by_time.plot(kind='bar')
+    # Plot Kernel Density Estimate (KDE) of the 'bid_ask_spread' column
+    sns.kdeplot(df['bid_ask_spread'], fill=True, color='purple', linewidth=2)
 
     # Set the plot title and axis labels with font size adjustments
-    plt.title("Intraday Trading Volume Histogram", fontsize=14)
-    plt.xlabel("Hour", fontsize=12)
-    plt.ylabel("Total Size", fontsize=12)
+    plt.title("Density Plot of Effective Bid-Ask Spread (%)", fontsize=14)
+    plt.xlabel("Effective Bid-Ask Spread (%)", fontsize=12)
+    plt.ylabel("Density", fontsize=12)
 
     # Add grid lines for easier readability
     plt.grid(True)

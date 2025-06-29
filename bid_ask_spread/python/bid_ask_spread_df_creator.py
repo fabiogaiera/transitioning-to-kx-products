@@ -39,12 +39,16 @@ def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2, market_open, ma
                 (kx.Column('datetime') <= kx.q(market_close))
         )
     )
-    # Calculate bid-ask spread
+    # Calculate mid_price
     filtered_taq_table = filtered_taq_table.update(
-        kx.Column('difference', value=kx.Column('bid_price') - kx.Column('ask_price')))
+        kx.Column('mid_price',
+                  value=((kx.Column('bid_price') + kx.Column('ask_price')) / 2)))
 
-    # Other way to calculate bid-ask spread
-    # filtered_taq_table['difference'] = filtered_taq_table['bid_price'] - filtered_taq_table['ask_price']
+    # Calculate Effective bid_ask_spread (Percentage Form)
+    filtered_taq_table = filtered_taq_table.update(
+        kx.Column('bid_ask_spread',
+                  value=((2 * abs(kx.Column('price') - kx.Column('mid_price'))) / kx.Column('mid_price')) * 100)
+    )
 
     # Convert to pandas DataFrame
     return filtered_taq_table.pd()
