@@ -32,10 +32,14 @@ def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2):
     # As-Of Join between trades and quotes tables
     kx.q('taq_table: aj[`sym`datetime;trades;quotes]')
 
-    # TODO: Filter TAQ data considering only market hours in UTC
+    # Filter TAQ data considering only market hours
+    kx.q('filtered_taq_table: ')
 
-    # TODO: Calculate effective bid-ask spread here
-    effective_bid_ask_spread_table = kx.q('...')
+    # Calculate mid_price
+    kx.q('...')
+
+    # Calculate Effective bid_ask_spread (Percentage Form)
+    filtered_taq_table = kx.q('...')
 
     # Convert to pandas DataFrame
-    return effective_bid_ask_spread_table.pd()
+    return filtered_taq_table.pd()
