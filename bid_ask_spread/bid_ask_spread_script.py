@@ -1,5 +1,6 @@
 import sys
 
+from bid_ask_spread.python.bid_ask_spread_density_plot_creator import create_density_plot
 from bid_ask_spread.python.bid_ask_spread_df_creator import retrieve_bid_ask_spread_df
 
 """
@@ -21,4 +22,5 @@ if __name__ == "__main__":
     market_close = '2025.05.23D20:00:00.000000000'
 
     bid_ask_spread_df = retrieve_bid_ask_spread_df(sys.argv[1], sys.argv[2], market_open, market_close)
-    print(bid_ask_spread_df)
+
+    create_density_plot(bid_ask_spread_df)
