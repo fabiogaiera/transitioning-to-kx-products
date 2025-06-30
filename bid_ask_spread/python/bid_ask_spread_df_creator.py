@@ -32,13 +32,14 @@ def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2, market_open, ma
     # As-Of Join between trades and quotes tables
     taq_table = kx.q.aj(kx.SymbolVector(['sym', 'datetime']), trades, quotes)
 
-    # Filter TAQ data considering only market hours in UTC
+    # Filter TAQ data considering only market hours
     filtered_taq_table = taq_table.select(
         where=(
                 (kx.Column('datetime') >= kx.q(market_open)) &
                 (kx.Column('datetime') <= kx.q(market_close))
         )
     )
+
     # Calculate mid_price
     filtered_taq_table = filtered_taq_table.update(
         kx.Column('mid_price',
