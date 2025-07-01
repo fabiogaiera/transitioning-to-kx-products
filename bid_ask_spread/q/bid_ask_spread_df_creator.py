@@ -21,7 +21,7 @@ datetime,sym,bid_price,bid_size,ask_price,ask_size
 
 
 @log_execution_time
-def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2):
+def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2, market_open, market_close):
     # Upload CSV files into kdb+ tables
     kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path_1}"')
     kx.q(f'quotes: ("PSFJFJ";enlist ",") 0: `$":{csv_file_path_2}"')
@@ -33,13 +33,14 @@ def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2):
     kx.q('taq_table: aj[`sym`datetime;trades;quotes]')
 
     # Filter TAQ data considering only market hours
-    kx.q('filtered_taq_table: ')
+    kx.q(f'filtered_taq_table: select from taq_table where datetime within({market_open};{market_close})')
 
     # Calculate mid_price
-    kx.q('...')
+    kx.q('filtered_taq_table: update mid_price: (bid_price + ask_price) % 2 from filtered_taq_table')
 
     # Calculate Effective bid_ask_spread (Percentage Form)
-    filtered_taq_table = kx.q('...')
+    filtered_taq_table = kx.q(
+        'update bid_ask_spread: 2 * (abs(price - mid_price) % mid_price) * 100 from filtered_taq_table')
 
     # Convert to pandas DataFrame
     return filtered_taq_table.pd()
