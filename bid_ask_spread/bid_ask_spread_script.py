@@ -1,7 +1,7 @@
 import sys
 
 from bid_ask_spread.bid_ask_spread_density_plot_creator import create_density_plot
-from bid_ask_spread.q.bid_ask_spread_df_creator import retrieve_bid_ask_spread_df
+from bid_ask_spread.python.bid_ask_spread_df_creator import retrieve_bid_ask_spread_df
 
 """
 Usage in Linux / Mac:
@@ -17,7 +17,7 @@ if __name__ == "__main__":
         print("Incorrect parameters")
         sys.exit(1)
 
-    # Daylight Saving Time (DST) for Eastern Time (ET) in the U.S. as we're analyzing IBM ticker.
+    # Daylight Saving Time (DST) for Eastern Time (ET) in the U.S. as we're analyzing the IBM ticker.
     market_open = '2025.05.23D13:30:00.000000000'
     market_close = '2025.05.23D20:00:00.000000000'
 
