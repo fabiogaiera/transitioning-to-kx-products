@@ -17,7 +17,8 @@ def create_dataframe(csv_file_path):
     trades = kx.q.read.csv(csv_file_path, 'PSFJ')
 
     # Execute a qSQL query using xbar to bucket the minutes into hours
-    trades_table = trades.select(kx.Column('i').count(), by=kx.Column('datetime').minute.xbar(60))
+    trades_table = trades.select(kx.Column('trade_count', value=kx.Column('i').count()),
+                                 by=kx.Column('time', value=kx.Column('datetime').minute.xbar(60)))
 
     # Transform to a pandas.DataFrame instance
     return trades_table.pd()
