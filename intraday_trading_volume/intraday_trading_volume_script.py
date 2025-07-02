@@ -1,10 +1,9 @@
 import sys
 
-from intraday_trading_volume.q.trades_dataframe_creator import create_dataframe
-from intraday_trading_volume.q.volumes_histogram_creator import create_histogram
+from intraday_trading_volume.python.trades_dataframe_creator import create_dataframe
+from intraday_trading_volume.volumes_histogram_creator import create_histogram
 
 # from intraday_trading_volume.python.trades_dataframe_creator import create_dataframe
-# from intraday_trading_volume.python.volumes_histogram_creator import create_histogram
 
 """
 Usage in Linux / Mac:
