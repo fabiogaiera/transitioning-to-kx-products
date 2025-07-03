@@ -72,13 +72,3 @@ def create_histogram(df):
 
 - Consider building a kdb+tick architecture when creating a real-time database and historical
   database with tick data.
-
-**Alpaca Trading API Documentation (Required in case you want to download market data)**
-
-Historical trades (single symbol): [Stock Trades](https://docs.alpaca.markets/reference/stocktradesingle-1)
-
-**KX Documentation**
-
-Database and Programming Language: [kdb+ and q](https://code.kx.com/q)
-
-Python interface library: [PyKX](https://code.kx.com/pykx)
