@@ -1,0 +1,11 @@
+From OneTick to kdb+: Exploring Migration Use Cases
+
+Migration projects are tough quite often, I would say. Besides the unexpected technical challenges that might appear along the migration process, the new technology awakes reluctancy to some people within the organization: In the case of kdb+ as a new technology to adopt for time series databases, the well-known criticisms our PO faced were: 
+
+licensing costs, 
+the lack of performance metrics: vendor-published benchmarks are rare o biased, 
+a difficult technology to learn, 
+lack of professionals in Switzerland specialized in kdb+ 
+
+among the most relevants.
+
