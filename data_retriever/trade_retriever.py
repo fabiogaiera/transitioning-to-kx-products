@@ -1,9 +1,15 @@
 import csv
+import logging
 import sys
 from pathlib import Path
 
 from alpaca_rest_client.api_client import get_response
 from alpaca_rest_client.dict_parser import fetch_csv_rows_from_trades_dict
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 
 def retrieve_trades_data(symbol, start_date, end_date, destination_folder):
@@ -37,6 +43,8 @@ def retrieve_trades_data(symbol, start_date, end_date, destination_folder):
                 rows = fetch_csv_rows_from_trades_dict(parsed_data)
                 writer.writerows(rows)
                 next_page_token = parsed_data['next_page_token']
+
+            logging.info(f"Next Page Token: {next_page_token}")
 
 
 """
