@@ -14,9 +14,9 @@ headers = {
 }
 
 
-def get_response(base_url, date, next_page_token=None):
+def get_response(base_url, start_date, end_date, next_page_token=None):
 
-    url_with_params = URLComposer(base_url, date)
+    url_with_params = URLComposer(base_url, start_date, end_date)
 
     if next_page_token:
 
