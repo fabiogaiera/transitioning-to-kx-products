@@ -6,8 +6,8 @@ from alpaca_rest_client.api_client import get_response
 from alpaca_rest_client.dict_parser import fetch_csv_rows_from_quotes_dict
 
 
-def retrieve_quotes_data(symbol, date, destination_folder):
-    file_name = "{}_{}_daily_quotes.csv".format(symbol, date)
+def retrieve_quotes_data(symbol, start_date, end_date, destination_folder):
+    file_name = "{}_quotes.csv".format(symbol)
     full_path = Path(destination_folder) / file_name
     str_full_path = str(full_path)
     base_url = f"https://data.alpaca.markets/v2/stocks/{symbol}/quotes"
@@ -25,7 +25,7 @@ def retrieve_quotes_data(symbol, date, destination_folder):
 
             if first_iteration:
 
-                parsed_data, next_page_token = get_response(base_url, date)
+                parsed_data, next_page_token = get_response(base_url, start_date, end_date)
                 rows = fetch_csv_rows_from_quotes_dict(parsed_data)
                 writer.writerows(rows)
                 next_page_token = parsed_data['next_page_token']
@@ -33,7 +33,7 @@ def retrieve_quotes_data(symbol, date, destination_folder):
 
             else:
 
-                parsed_data, next_page_token = get_response(base_url, date, next_page_token)
+                parsed_data, next_page_token = get_response(base_url, start_date, end_date, next_page_token)
                 rows = fetch_csv_rows_from_quotes_dict(parsed_data)
                 writer.writerows(rows)
                 next_page_token = parsed_data['next_page_token']
@@ -50,7 +50,7 @@ See https://alpaca.markets to get an API key and its corresponding secret
 
 if __name__ == "__main__":
 
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 5:
         print("Usage: python quote_retriever.py <symbol> <yyyy-MM-dd> </path/to/folder>")
         sys.exit(1)
-    retrieve_quotes_data(sys.argv[1], sys.argv[2], sys.argv[3])
+    retrieve_quotes_data(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
