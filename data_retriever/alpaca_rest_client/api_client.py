@@ -3,7 +3,7 @@ import os
 
 import requests
 
-from .url_composer import URLComposer
+from data_retriever.alpaca_rest_client.url_composer import URLComposer
 
 headers = {
 

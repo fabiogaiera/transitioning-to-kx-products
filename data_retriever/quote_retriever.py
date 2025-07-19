@@ -3,8 +3,8 @@ import logging
 import sys
 from pathlib import Path
 
-from alpaca_rest_client.api_client import get_response
-from alpaca_rest_client.dict_parser import fetch_csv_rows_from_quotes_dict
+from data_retriever.alpaca_rest_client.api_client import get_response
+from data_retriever.alpaca_rest_client.dict_parser import fetch_csv_rows_from_quotes_dict
 
 logging.basicConfig(
     level=logging.INFO,

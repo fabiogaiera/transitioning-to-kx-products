@@ -24,7 +24,7 @@ def create_dataframe(csv_file_path, date, market_open, market_close):
     )
 
     # Filter trades data considering only market hours
-    filtered_intraday_table = intraday_trades.select(
+    filtered_intraday_trades = intraday_trades.select(
         where=(
                 (kx.Column('datetime') >= kx.q(market_open)) &
                 (kx.Column('datetime') <= kx.q(market_close))
@@ -32,8 +32,8 @@ def create_dataframe(csv_file_path, date, market_open, market_close):
     )
 
     # Execute a qSQL query using xbar to bucket the minutes into hours
-    trades_table = filtered_intraday_table.select(kx.Column('trade_count', value=kx.Column('i').count()),
-                                                  by=kx.Column('time', value=kx.Column('datetime').minute.xbar(60)))
+    trades_table = filtered_intraday_trades.select(kx.Column('trade_count', value=kx.Column('i').count()),
+                                                   by=kx.Column('time', value=kx.Column('datetime').minute.xbar(60)))
 
     # Transform to a pandas.DataFrame instance
     return trades_table.pd()

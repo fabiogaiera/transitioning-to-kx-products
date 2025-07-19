@@ -12,12 +12,18 @@ datetime,sym,price,size
 """
 
 
-def create_dataframe(csv_file_path):
+def create_dataframe(csv_file_path, date, market_open, market_close):
     # Upload a CSV file into a kdb+ table
     kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
 
+    # Filter trades data by day
+    kx.q(f'intraday_trades: select from trades where (`date$datetime) = {date}')
+
+    # Filter trades data considering only market hours
+    kx.q(f'filtered_intraday_trades: select from intraday_trades where datetime within {market_open} {market_close}')
+
     # Execute a qSQL query using xbar to bucket the minutes into hours
-    trades_table = kx.q('select trade_count:count i by time:60 xbar datetime.minute from trades')
+    trades_table = kx.q('select trade_count:count i by time:60 xbar datetime.minute from filtered_intraday_trades')
 
     # Transform to a pandas.DataFrame instance
     return trades_table.pd()
