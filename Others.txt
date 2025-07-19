@@ -1,0 +1,9 @@
+- OHLCV Data
+- Intraday Trading Volume Histogram
+- Bid-Ask Spread
+
+
+
+python -m intraday_trading_volume.intraday_trading_volume_script C:/users/fabio/Downloads/IBM_trades.csv 2025.06.06
+
+python -m bid_ask_spread.bid_ask_spread_script C:/users/fabio/Downloads/IBM_trades.csv C:/users/fabio/Downloads/IBM_quotes.csv

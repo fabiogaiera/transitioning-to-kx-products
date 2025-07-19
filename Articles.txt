@@ -1,3 +1,0 @@
-- OHLCV Data
-- Intraday Trading Volume Histogram
-- Bid-Ask Spread
