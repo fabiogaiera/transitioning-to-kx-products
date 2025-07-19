@@ -39,30 +39,7 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/fabio/source/transitioning-to-kx-products/intraday_trading_volume&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.intraday_trading_volume.intraday_trading_volume_script">
-    <configuration name="data_retriever.trade_retriever" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="transitioning-to-kx-products" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (transitioning-to-kx-products)" />
-      <option name="WORKING_DIRECTORY" value="C:\Users\fabio\source\transitioning-to-kx-products\data_retriever" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="data_retriever.trade_retriever" />
-      <option name="PARAMETERS" value="IBM 2025-06-01 2025-06-30 $USER_HOME$/Downloads" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="true" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="intraday_trading_volume.intraday_trading_volume_script" type="PythonConfigurationType" factoryName="Python">
       <module name="transitioning-to-kx-products" />
       <option name="ENV_FILES" value="" />
@@ -86,10 +63,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Python.data_retriever.trade_retriever" />
-      <item itemvalue="Python.intraday_trading_volume.intraday_trading_volume_script" />
-    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
