@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f37c33dd-90dd-416e-b1d3-c4de3f66b9d3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/articles/LinkedIn Article 1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/articles/LinkedIn Article 1.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,18 +30,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.aaa.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data_retriever.trade_retriever.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.intraday_trading_volume.intraday_trading_volume_script.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.trade_retriever.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/fabio/source/transitioning-to-kx-products/intraday_trading_volume&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.aaa.executor": "Run",
+    "Python.data_retriever.trade_retriever.executor": "Debug",
+    "Python.intraday_trading_volume.intraday_trading_volume_script.executor": "Run",
+    "Python.intraday_trading_volume_script.executor": "Run",
+    "Python.trade_retriever.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop",
+    "last_opened_file_path": "C:/Users/fabio/source/transitioning-to-kx-products/intraday_trading_volume",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\fabio\source\transitioning-to-kx-products\articles" />
@@ -64,7 +64,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="intraday_trading_volume.intraday_trading_volume_script" />
-      <option name="PARAMETERS" value="$USER_HOME$/Downloads/IBM_trades.csv 2025.06.06" />
+      <option name="PARAMETERS" value="$USER_HOME$/Downloads/IBM_trades.csv 2025-06-06" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="true" />
