@@ -14,9 +14,14 @@ datetime,sym,price,size
 
 def create_dataframe(csv_file_path, date, market_open, market_close):
     # Upload a CSV file into a kdb+ table
+    # P stands for timestamp
+    # S stands for symbol
+    # F stands for float
+    # J stands for long
     kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
 
     # Filter trades data by day
+    # Our datetime field is timestamp data type, but we have to cast it to date for filtering
     kx.q(f'intraday_trades: select from trades where (`date$datetime) = {date}')
 
     # Filter trades data considering only market hours
