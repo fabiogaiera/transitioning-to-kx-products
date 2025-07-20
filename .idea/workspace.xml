@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f37c33dd-90dd-416e-b1d3-c4de3f66b9d3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/LinkedIn Article 1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedIn Article.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LinkedIn Articles.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Others.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_examples/IBM_quotes.zip" beforeDir="false" afterPath="$PROJECT_DIR$/data_examples/IBM_quotes.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_examples/IBM_trades.zip" beforeDir="false" afterPath="$PROJECT_DIR$/data_examples/IBM_trades.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/intraday_trading_volume/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/intraday_trading_volume/intraday_trading_volume_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/intraday_trading_volume/intraday_trading_volume_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/intraday_trading_volume/python/trades_dataframe_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/intraday_trading_volume/python/trades_dataframe_creator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/intraday_trading_volume/q/trades_dataframe_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/intraday_trading_volume/q/trades_dataframe_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinkedIn Article 1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LinkedIn Article 1.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
