@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f37c33dd-90dd-416e-b1d3-c4de3f66b9d3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/LinkedIn Article 1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LinkedIn Article 1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/articles/LinkedIn Article 1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/articles/LinkedIn Article 1.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +43,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\fabio\source\transitioning-to-kx-products\articles" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="intraday_trading_volume.intraday_trading_volume_script" type="PythonConfigurationType" factoryName="Python">
       <module name="transitioning-to-kx-products" />

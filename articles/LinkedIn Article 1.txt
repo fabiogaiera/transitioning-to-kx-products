@@ -162,6 +162,8 @@ def create_histogram(df):
     # Display the plot on the screen
     plt.show() 
 
+Here's the link to the GitHub repository: https://github.com/fabiogaiera/transitioning-to-kx-products/tree/master/intraday_trading_volume
+
 Potential enhancements for this use case
 
 - In real-world scenarios, kdb+ tables are partitioned. This allows to achieve an optimal performance when storing / retrieving kdb+ data. 
