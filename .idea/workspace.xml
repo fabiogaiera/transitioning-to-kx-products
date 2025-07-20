@@ -5,6 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f37c33dd-90dd-416e-b1d3-c4de3f66b9d3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/candlestick_chart/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/candlestick_chart/candlestick_chart_script.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/candlestick_chart/python/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/candlestick_chart/python/ohlcv_dataset_creator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/candlestick_chart/q/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +41,8 @@
     "Python.data_retriever.trade_retriever.executor": "Debug",
     "Python.intraday_trading_volume.intraday_trading_volume_script.executor": "Run",
     "Python.intraday_trading_volume_script.executor": "Run",
+    "Python.ohlcv_dataset_creator.executor": "Run",
+    "Python.pykx_installation_verification.executor": "Run",
     "Python.trade_retriever.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "develop",
@@ -48,7 +55,7 @@
       <recent name="C:\Users\fabio\source\transitioning-to-kx-products\articles" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.ohlcv_dataset_creator">
     <configuration name="intraday_trading_volume.intraday_trading_volume_script" type="PythonConfigurationType" factoryName="Python">
       <module name="transitioning-to-kx-products" />
       <option name="ENV_FILES" value="" />
@@ -72,6 +79,37 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="ohlcv_dataset_creator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="transitioning-to-kx-products" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ohlcv_dataset/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ohlcv_dataset/python/ohlcv_dataset_creator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.intraday_trading_volume.intraday_trading_volume_script" />
+      <item itemvalue="Python.ohlcv_dataset_creator" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.ohlcv_dataset_creator" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
