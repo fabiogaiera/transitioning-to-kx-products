@@ -1,5 +1,9 @@
 # volumes_histogram_creator.py
 
+# Required for Linux compatibility
+import matplotlib
+matplotlib.use('TkAgg')
+
 # Import necessary libraries
 import matplotlib.pyplot as plt
 
