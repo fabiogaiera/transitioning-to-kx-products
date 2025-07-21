@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f37c33dd-90dd-416e-b1d3-c4de3f66b9d3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/candlestick_chart/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/candlestick_chart/candlestick_chart_script.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/candlestick_chart/python/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/candlestick_chart/python/ohlcv_dataset_creator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/candlestick_chart/q/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intraday_trading_volume/volumes_histogram_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/intraday_trading_volume/volumes_histogram_creator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,27 +32,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.aaa.executor": "Run",
-    "Python.data_retriever.trade_retriever.executor": "Debug",
-    "Python.intraday_trading_volume.intraday_trading_volume_script.executor": "Run",
-    "Python.intraday_trading_volume_script.executor": "Run",
-    "Python.ohlcv_dataset_creator.executor": "Run",
-    "Python.pykx_installation_verification.executor": "Run",
-    "Python.trade_retriever.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop",
-    "last_opened_file_path": "C:/Users/fabio/source/transitioning-to-kx-products/intraday_trading_volume",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.aaa.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_retriever.trade_retriever.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.intraday_trading_volume.intraday_trading_volume_script.executor&quot;: &quot;Run&quot;,
+    &quot;Python.intraday_trading_volume_script.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ohlcv_dataset_creator.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pykx_installation_verification.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trade_retriever.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/fabio/source/transitioning-to-kx-products&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\fabio\source\transitioning-to-kx-products\articles" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ohlcv_dataset_creator">
+  <component name="RunManager" selected="Python.pykx_installation_verification">
     <configuration name="intraday_trading_volume.intraday_trading_volume_script" type="PythonConfigurationType" factoryName="Python">
       <module name="transitioning-to-kx-products" />
       <option name="ENV_FILES" value="" />
@@ -65,7 +64,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (transitioning-to-kx-products)" />
       <option name="WORKING_DIRECTORY" value="C:\Users\fabio\source\transitioning-to-kx-products\intraday_trading_volume" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -101,12 +99,36 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="pykx_installation_verification" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="transitioning-to-kx-products" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pykx_installation_verification.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.intraday_trading_volume.intraday_trading_volume_script" />
+      <item itemvalue="Python.pykx_installation_verification" />
       <item itemvalue="Python.ohlcv_dataset_creator" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.pykx_installation_verification" />
         <item itemvalue="Python.ohlcv_dataset_creator" />
       </list>
     </recent_temporary>
@@ -114,7 +136,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-975db3bf15a3-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.18034.82" />
+        <option value="bundled-python-sdk-348a24fa61fa-5312c7369657-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.23774.444" />
       </set>
     </attachedChunks>
   </component>

@@ -20,6 +20,12 @@ Activate Virtual Environment (Windows):`.venv\Scripts\activate`
 
 Install Libraries: `pip install requests pykx matplotlib seaborn`
 
+When using Linux (Ubuntu distro): 
+
+`pip install tk`  
+`sudo apt-get install python3-tk`  
+
+
 **Alpaca Trading API Documentation (Required in case you want to download market data)**
 
 Historical trades (single symbol): [Stock Trades](https://docs.alpaca.markets/reference/stocktradesingle-1)  
