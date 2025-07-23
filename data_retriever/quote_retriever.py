@@ -21,7 +21,7 @@ def retrieve_quotes_data(symbol, start_date, end_date, destination_folder):
     with open(str_full_path, 'w', newline='') as file:
 
         writer = csv.writer(file)
-        first_row = ["datetime", "sym", "bid_price", "bid_size", "ask_price", "ask_size"]
+        first_row = ["timestamp", "sym", "bid_price", "bid_size", "ask_price", "ask_size"]
         writer.writerow(first_row)
 
         next_page_token = None
