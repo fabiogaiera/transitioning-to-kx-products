@@ -18,7 +18,21 @@ Activate Virtual Environment (Linux / Mac): `source .venv/bin/activate`
 
 Activate Virtual Environment (Windows):`.venv\Scripts\activate`
 
-Install Libraries: `pip install requests pykx matplotlib seaborn`
+Install Libraries: 
+
+`pip install requests`  
+`pip install pykx`  
+`pip install matplotlib`   
+`pip install seaborn`  
+`pip install plotly`  
+
+When using Linux (Ubuntu distro): 
+
+`pip install tk`  
+
+```bash
+sudo apt-get install python3-tk  
+```
 
 **Alpaca Trading API Documentation (Required in case you want to download market data)**
 
