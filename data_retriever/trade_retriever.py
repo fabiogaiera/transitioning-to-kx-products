@@ -21,7 +21,7 @@ def retrieve_trades_data(symbol, start_date, end_date, destination_folder):
     with open(str_full_path, 'w', newline='') as file:
 
         writer = csv.writer(file)
-        first_row = ["datetime", "sym", "price", "size"]
+        first_row = ["timestamp", "sym", "price", "size"]
         writer.writerow(first_row)
 
         next_page_token = None

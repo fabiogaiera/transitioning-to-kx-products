@@ -1,6 +1,7 @@
 import sys
 
 from candlestick_chart.python.ohlcv_dataset_creator import create_dataframe
+from candlestick_chart.candlestick_chart_creator import create_candlestick_chart
 
 """
 Usage in Linux / Mac:
@@ -25,4 +26,4 @@ if __name__ == "__main__":
     market_close_timespan = '20:00:00.000000000'
 
     trades_data_frame = create_dataframe(trades_data, market_open_timespan, market_close_timespan)
-    print(trades_data_frame)
+    create_candlestick_chart(trades_data_frame)
