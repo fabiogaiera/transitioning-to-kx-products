@@ -29,5 +29,4 @@ if __name__ == "__main__":
     market_close = '2025.06.06D20:00:00.000000000'
 
     trades_data_frame = create_dataframe(trades_data, date, market_open, market_close)
-    print(trades_data_frame)
     create_histogram(trades_data_frame)
