@@ -1,34 +1,30 @@
 # volumes_histogram_creator.py
 
-# Required for Linux compatibility
-import matplotlib
-matplotlib.use('TkAgg')
 
 # Import necessary libraries
 import matplotlib.pyplot as plt
 
 
 def create_histogram(df):
-    # Create a new figure object
-    fig = plt.figure()
+    # Create a new figure and axes object
+    fig, ax = plt.subplots()
 
-    # Set the window title of the figure (only works in some GUI backends)
+    # Set the window title
     fig.canvas.manager.set_window_title("Intraday Analysis")
 
-    # Aggregate and plot
-    volume_by_time = df.groupby('time')['trade_count'].sum()
-    volume_by_time.plot(kind='bar')
+    # Plot the DataFrame on the specified axes
+    df.plot(kind='bar', ax=ax)
 
-    # Set the plot title and axis labels with font size adjustments
-    plt.title("Intraday Trading Volume Histogram", fontsize=14)
-    plt.xlabel("Hour", fontsize=12)
-    plt.ylabel("Total Size", fontsize=12)
+    # Set the plot title and axis labels
+    ax.set_title("Intraday Trading Volume Histogram", fontsize=14)
+    ax.set_xlabel("Hour", fontsize=12)
+    ax.set_ylabel("Total Size", fontsize=12)
 
-    # Add grid lines for easier readability
-    plt.grid(True)
+    # Add grid lines
+    ax.grid(True)
 
-    # Adjust subplot params to give specified padding and prevent clipping of labels/titles
+    # Adjust layout
     plt.tight_layout()
 
-    # Display the plot on the screen
+    # Show the plot
     plt.show()
