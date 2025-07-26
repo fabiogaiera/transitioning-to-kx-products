@@ -33,11 +33,12 @@ def create_dataframe(csv_file_path, date, market_open, market_close):
     )
 
     # Execute a qSQL query using xbar to bucket the minutes into hours
-    trades_table = filtered_intraday_trades.select(kx.Column('trades_count', value=kx.Column('i').count()),
-                                                   by=kx.Column('time', value=kx.Column('timestamp').minute.xbar(60)))
+    aggregation = filtered_intraday_trades.select(kx.Column('trades_count', value=kx.Column('i').count()),
+                                                  by=kx.Column('time', value=kx.Column('timestamp').minute.xbar(60)))
 
     # Other way to rename columns
-    # trades_table = filtered_intraday_trades.select(kx.Column('i').count().name('trades_count'), by=kx.Column('timestamp').minute.xbar(60))
+    # aggregation = filtered_intraday_trades.select(kx.Column('i').count().name('trades_count'),
+    #                                               by=kx.Column('timestamp').minute.xbar(60).name('time'))
 
     # Transform to a pandas.DataFrame instance
-    return trades_table.pd()
+    return aggregation.pd()
