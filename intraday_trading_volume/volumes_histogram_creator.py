@@ -1,6 +1,5 @@
 # volumes_histogram_creator.py
 
-
 # Import necessary libraries
 import matplotlib.pyplot as plt
 

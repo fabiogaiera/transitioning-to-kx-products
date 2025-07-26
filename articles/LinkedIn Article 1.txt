@@ -1,8 +1,6 @@
-
 Transitioning to KX Products: Creating an Intraday Trading Volume Histogram 📊
 
-This post is a continuation of my previous article: https://www.linkedin.com/pulse/transitioning-kx-products-exploring-series-use-cases-fabio-gaiera-rfi2f/
-
+This post is a continuation of my previous article: Transitioning to KX Products: Exploring a Series of Use Cases 🚀
 Getting Comfortable with a New Stack
 
 Even if it might seem trivial, it's worth emphasizing: migrating to a new technology can be frustrating.
@@ -22,17 +20,6 @@ In this use case, I’ll walk you through key concepts and operations using kdb+
 📊 Grouping and aggregating data using xbar
 
 🐍 Seamless integration with your existing Python code — because, let’s be honest, you probably have a lot of it!
-
-q vs Pythonic Style: Choose Your Path
-
-For those who love q, I’ve included Python scripts that call q expressions:
-
-kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
-
-For those who prefer a more Pythonic approach, I’ve also written the script using the PyKX interface library:
-
-trades = kx.q.read.csv(csv_file_path, 'PSFJ')
-
 Prerequisites
 
 Before we dive in, make sure:
@@ -40,49 +27,11 @@ Before we dive in, make sure:
 ✅ kdb+ and PyKX are installed and working
 
 ✅ You have some example CSV tick data ready (you can use sample data from my repository)
-
 Let’s Build: Intraday Trading Volume Histogram
 
 Now that you're set up, you're ready to build your Intraday Trading Volume Histogram step by step.
 
-q Style looks as follows:
-
-# trades_dataframe_creator.py
-
-# Import necessary libraries
-import pykx as kx
-
-"""
-CSV format example
-datetime,sym,price,size
-2025.05.05D08:00:00.009039359,IBM,244.56,10
-2025.05.05D08:00:00.156501572,IBM,243,8
-2025.05.05D08:00:00.156579644,IBM,244.03,6
-"""
-
-
-def create_dataframe(csv_file_path, date, market_open, market_close):
-    # Upload a CSV file into a kdb+ table
-    # P stands for timestamp
-    # S stands for symbol
-    # F stands for float
-    # J stands for long
-    kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
-
-    # Filter trades data by day
-    # Our datetime field is timestamp data type, but we have to cast it to date for filtering
-    kx.q(f'intraday_trades: select from trades where (`date$datetime) = {date}')
-
-    # Filter trades data considering only market hours
-    kx.q(f'filtered_intraday_trades: select from intraday_trades where datetime within {market_open} {market_close}')
-
-    # Execute a qSQL query using xbar to bucket the minutes into hours
-    trades_table = kx.q('select trade_count:count i by time:60 xbar datetime.minute from filtered_intraday_trades')
-
-    # Transform to a pandas.DataFrame instance
-    return trades_table.pd() 
-
-Whereas using Pythonic style is:
+By using the PyKX interface library, at first we will create the function which returns a pandas DataFrame
 
 # trades_dataframe_creator.py
 
@@ -91,7 +40,7 @@ import pykx as kx
 
 """
 CSV format example for trades
-datetime,sym,price,size
+timestamp,sym,price,size
 2025.05.05D08:00:00.009039359,IBM,244.56,10
 2025.05.05D08:00:00.156501572,IBM,243,8
 2025.05.05D08:00:00.156579644,IBM,244.03,6
@@ -100,36 +49,34 @@ datetime,sym,price,size
 
 def create_dataframe(csv_file_path, date, market_open, market_close):
     # Upload a CSV file into a kdb+ table
-    # P stands for timestamp
-    # S stands for symbol
-    # F stands for float
-    # J stands for long
-    trades = kx.q.read.csv(csv_file_path, 'PSFJ')
+    trades = kx.q.read.csv(csv_file_path, [kx.TimestampAtom, kx.SymbolAtom, kx.FloatAtom, kx.LongAtom])
 
     # Filter trades data by day
     # Our datetime field is timestamp data type, but we have to cast it to date for filtering
     intraday_trades = trades.select(
         where=(
-                (kx.Column('datetime').cast('date')) == kx.q(date)
+                (kx.Column('timestamp').cast('date')) == kx.q(date)
         )
     )
 
     # Filter trades data considering only market hours
     filtered_intraday_trades = intraday_trades.select(
         where=(
-                (kx.Column('datetime') >= kx.q(market_open)) &
-                (kx.Column('datetime') <= kx.q(market_close))
+                (kx.Column('timestamp') >= kx.q(market_open)) &
+                (kx.Column('timestamp') <= kx.q(market_close))
         )
     )
 
     # Execute a qSQL query using xbar to bucket the minutes into hours
-    trades_table = filtered_intraday_trades.select(kx.Column('trade_count', value=kx.Column('i').count()),
-                                                   by=kx.Column('time', value=kx.Column('datetime').minute.xbar(60)))
+    aggregation = filtered_intraday_trades.select(kx.Column('trades_count', value=kx.Column('i').count()),
+                                                  by=kx.Column('time', value=kx.Column('timestamp').minute.xbar(60)))
+
+  
 
     # Transform to a pandas.DataFrame instance
-    return trades_table.pd() 
+    return aggregation.pd()
 
-Having created the pandas DataFrame, we can build the histogram:
+Having created the pandas DataFrame instance, we can build the histogram using Matplotlib:
 
 # volumes_histogram_creator.py
 
@@ -138,35 +85,76 @@ import matplotlib.pyplot as plt
 
 
 def create_histogram(df):
-    # Create a new figure object
-    fig = plt.figure()
+    # Create a new figure and axes object
+    fig, ax = plt.subplots()
 
-    # Set the window title of the figure (only works in some GUI backends)
+    # Set the window title
     fig.canvas.manager.set_window_title("Intraday Analysis")
 
-    # Aggregate and plot
-    volume_by_time = df.groupby('time')['trade_count'].sum()
-    volume_by_time.plot(kind='bar')
+    # Plot the DataFrame on the specified axes
+    df.plot(kind='bar', ax=ax)
 
-    # Set the plot title and axis labels with font size adjustments
-    plt.title("Intraday Trading Volume Histogram", fontsize=14)
-    plt.xlabel("Hour", fontsize=12)
-    plt.ylabel("Total Size", fontsize=12)
+    # Set the plot title and axis labels
+    ax.set_title("Intraday Trading Volume Histogram", fontsize=14)
+    ax.set_xlabel("Hour", fontsize=12)
+    ax.set_ylabel("Total Size", fontsize=12)
 
-    # Add grid lines for easier readability
-    plt.grid(True)
+    # Add grid lines
+    ax.grid(True)
 
-    # Adjust subplot params to give specified padding and prevent clipping of labels/titles
+    # Adjust layout
     plt.tight_layout()
 
-    # Display the plot on the screen
-    plt.show() 
+    # Show the plot
+    plt.show()
 
-Here's the link to the GitHub repository: https://github.com/fabiogaiera/transitioning-to-kx-products/tree/master/intraday_trading_volume
+Finally, The main script looks as follows:
+
+import sys
+
+from intraday_trading_volume.python.trades_dataframe_creator import create_dataframe
+from intraday_trading_volume.volumes_histogram_creator import create_histogram
+
+"""
+Usage in Linux / Mac:
+python -m intraday_trading_volume.intraday_trading_volume_script /path/to/file/trades.csv 2025-06-06
+
+Usage in Windows: 
+python -m intraday_trading_volume.intraday_trading_volume_script C:/path/to/file/trades.csv 2025-06-06
+"""
+
+if __name__ == "__main__":
+
+    if len(sys.argv) != 3:
+        print("Incorrect parameters")
+        sys.exit(1)
+
+    # Path to the CSV file
+    trades_data = sys.argv[1]
+
+    # Date data type in q
+    date = sys.argv[2].replace('-', '.')
+
+    # Daylight Saving Time (DST) for Eastern Time (ET) in the U.S. as we're analyzing the IBM ticker.
+    # Timestamp data type in q
+    market_open = '2025.06.06D13:30:00.000000000'
+    market_close = '2025.06.06D20:00:00.000000000'
+
+    trades_data_frame = create_dataframe(trades_data, date, market_open, market_close)
+    create_histogram(trades_data_frame)
+
+Here's the link to the GitHub repository: Intraday Trading Volume
 
 Potential enhancements for this use case
 
-- In real-world scenarios, kdb+ tables are partitioned. This allows to achieve an optimal performance when storing / retrieving kdb+ data. 
-- Consider building a kdb+tick architecture when creating a real-time database and historical database with tick data.
+    In real-world scenarios, kdb+ tables are partitioned. This allows to achieve an optimal performance when storing / retrieving kdb+ data.
 
-Thanks for reading! Feedback is much appreciated.
+    Consider building a kdb+tick architecture when creating a real-time database and historical database with tick data.
+
+Further readings
+
+    Database Creation and Management
+
+    Example: Real-Time Streaming using PyKX
+
+Glad you made it to the end—hope you enjoyed it.
