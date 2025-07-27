@@ -17,8 +17,8 @@ def create_dataframe(csv_file_path, market_open_timespan, market_close_timespan)
     trades['date'] = trades['timestamp'].date
     trades.set_index('date')
 
-    trades['market_open'] = trades['date'] + kx.TimespanAtom(kx.q(market_open_timespan))
-    trades['market_close'] = trades['date'] + kx.TimespanAtom(kx.q(market_close_timespan))
+    trades['market_open'] = trades['date'] + kx.q(market_open_timespan)
+    trades['market_close'] = trades['date'] + kx.q(market_close_timespan)
 
     market_hours_trades = trades.select(
 
