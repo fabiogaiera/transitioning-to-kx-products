@@ -38,7 +38,7 @@ def create_dataframe(csv_file_path, date, market_open, market_close):
 
     # Other way to rename columns
     # aggregation = filtered_intraday_trades.select(kx.Column('i').count().name('trades_count'),
-    #                                               by=kx.Column('timestamp').minute.xbar(60).name('time'))
+    #                                              by=kx.Column('timestamp').minute.xbar(60).name('time'))
 
     # Transform to a pandas.DataFrame instance
     return aggregation.pd()
