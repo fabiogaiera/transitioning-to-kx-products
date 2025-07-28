@@ -14,12 +14,17 @@ def create_dataframe(csv_file_path, market_open_timespan, market_close_timespan)
     # Upload a CSV file into a kdb+ table
     trades = kx.q.read.csv(csv_file_path, [kx.TimestampAtom, kx.SymbolAtom, kx.FloatAtom, kx.LongAtom])
 
+    # Add the column date
     trades['date'] = trades['timestamp'].date
+
+    # Set an index
     trades.set_index('date')
 
+    # Add the columns market_open and market_close
     trades['market_open'] = trades['date'] + kx.q(market_open_timespan)
     trades['market_close'] = trades['date'] + kx.q(market_close_timespan)
 
+    # Select trades done during market hours
     market_hours_trades = trades.select(
 
         where=(
@@ -28,6 +33,7 @@ def create_dataframe(csv_file_path, market_open_timespan, market_close_timespan)
         )
     )
 
+    # Aggregate data by date
     aggregated_data = market_hours_trades.select(
 
         columns={
@@ -43,4 +49,5 @@ def create_dataframe(csv_file_path, market_open_timespan, market_close_timespan)
 
     )
 
+    # Transform to a pandas.DataFrame instance
     return aggregated_data.pd()

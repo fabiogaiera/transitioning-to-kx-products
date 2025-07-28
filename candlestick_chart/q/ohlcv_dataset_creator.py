@@ -18,12 +18,17 @@ def create_dataframe(csv_file_path, market_open_timespan, market_close_timespan)
     # J stands for long
     kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
 
+    # Add the column date
     kx.q(f'trades: update date: `date$timestamp from trades')
 
+    # Add the columns mo and mc
     kx.q(f'trades: update mo: date + {market_open_timespan}, mc: date + {market_close_timespan} from trades')
 
+    # Select trades done during market hours
     kx.q(f'trades: select from trades where timestamp within (mo; mc)')
 
-    aggregation = kx.q(f'select open: first price, high: max price, low: min price, close: last price, volume: sum size by date from trades ')
+    # Aggregate data by date
+    aggregation = kx.q('select open: first price, high: max price, low: min price, close: last price, volume: sum size by date from trades')
 
+    # Transform to a pandas.DataFrame instance
     return aggregation.pd()

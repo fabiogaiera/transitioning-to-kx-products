@@ -26,9 +26,13 @@ Install Libraries:
 `pip install seaborn`  
 `pip install plotly`  
 
-When using Linux (Ubuntu distro): 
+When using a Linux distro check whether **Tkinter** has been installed:
 
-`pip install tk`  
+```bash
+python -c "import tkinter; tkinter._test()"
+```
+
+If test isn't successful, execute
 
 ```bash
 sudo apt-get install python3-tk  
