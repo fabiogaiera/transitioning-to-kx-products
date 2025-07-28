@@ -17,7 +17,7 @@ def create_candlestick_chart(df):
 
     fig.update_layout(
         title={
-            'text': '📈 Candlestick Chart',
+            'text': 'Candlestick Chart',
             'y': 0.95,
             'x': 0.5,
             'xanchor': 'center',
