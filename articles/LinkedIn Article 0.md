@@ -1,14 +1,11 @@
-Transitioning to KX Products: Exploring a Series of Use Cases 🚀
+# Transitioning to KX Products: Exploring a Series of Use Cases 🚀
 
 Migration projects are often challenging. Beyond the unexpected technical challenges that may arise during the process, new technologies can spark reluctance among individuals within the organization. In the case of kdb+ as a new technology for time series databases, the most prominent criticisms I've encountered have been:
 
-💰 Licensing costs: It's very expensive,
-
-📉 Lack of performance metrics: Vendor-published benchmarks are rare or biased,
-
-🤯 Difficult to learn: kdb+ is very complicated,
-
-💻 Support for adoption: There is a lack of professionals in Switzerland specialized in kdb+
+- 💰 **Licensing costs**: It's very expensive,
+- 📉 **Lack of performance metrics**: Vendor-published benchmarks are rare or biased,
+- 🤯 **Difficult to learn**: kdb+ is very complicated,
+- 💻 **Support for adoption**: There is a lack of professionals specialized in kdb+
 
 Despite these criticisms —many of which are often unfounded— the organization moved forward with the transition to KX products. In my view, this was a wise, long-term decision. I’d like to share my experience working on this migration project so far:
 
@@ -20,4 +17,4 @@ It's well known that the syntactic style of kdb+/q can be difficult for newbies.
 
 Over the coming days, I will showcase a series of use cases that will help you understand the basics of how to seamlessly integrate kdb+ into your organization, leveraging a modern tech stack including the Python ecosystem.
 
-Thanks for reading!
+**Thanks for reading!**
