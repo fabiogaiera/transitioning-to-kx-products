@@ -1,6 +1,7 @@
 Transitioning to KX Products: Creating an Intraday Trading Volume Histogram 📊
 
 This post is a continuation of my previous article: Transitioning to KX Products: Exploring a Series of Use Cases 🚀
+
 Getting Comfortable with a New Stack
 
 Even if it might seem trivial, it's worth emphasizing: migrating to a new technology can be frustrating.
@@ -27,6 +28,7 @@ Before we dive in, make sure:
 ✅ kdb+ and PyKX are installed and working
 
 ✅ You have some example CSV tick data ready (you can use sample data from my repository)
+
 Let’s Build: Intraday Trading Volume Histogram
 
 Now that you're set up, you're ready to build your Intraday Trading Volume Histogram step by step.
