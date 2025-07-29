@@ -55,7 +55,7 @@ In this walkthrough, I’ll show you how to construct OHLCV datasets and candles
 ### 🧪 Core Workflow
 
 - 📂 Upload a CSV file (tick-by-tick trade data) into an in-memory kdb+ table  
-- 🧱 Add new columns to help with dataset construction using `update` 
+- 🧱 Add auxiliar columns to help with dataset construction 
 - 🔍 Query the data (something we covered in a previous post)  
 - 📊 Group and aggregate using built-in operators like `first`, `max`, `min`, `last`  
 - 🧬 Integrate everything with your existing Python codebase. This one’s a game-changer if you're coming from a Python-heavy stack!
