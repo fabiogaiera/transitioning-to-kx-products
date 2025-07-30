@@ -4,9 +4,8 @@ This post is a continuation of my previous write-up: [Creating an Intraday Tradi
 
 Today, we’re diving into something simple but incredibly powerful in the world of trading data: **OHLCV datasets**.
 
-Yes—**Open, High, Low, Close, Volume**. So basic, right?
-
-But don’t be fooled. These little columns unlock a ton of possibilities, from technical analysis to full-on algorithmic strategy development.
+Yes—**Open, High, Low, Close, Volume**. So basic, right? But don’t be fooled. These little columns unlock a ton of
+possibilities, from technical analysis to full-on algorithmic strategy development.
 
 ## 🧩 Why OHLCV Matters (More Than You Think)
 
@@ -47,31 +46,28 @@ OHLCV datasets come into play across many different use cases. Here's just a tas
 
 And honestly, that’s just scratching the surface. 💡
 
+## ✅ What You Need Before We Start
+
+- ✅ kdb+ and PyKX installed and working
+- ✅ A sample CSV file with tick data (You can grab some from my GitHub repo if needed)
 
 ## 🛠️ Time to Build!
 
-In this walkthrough, I’ll show you how to construct OHLCV datasets and candlestick charts using **kdb+** and **PyKX**.
+In this walkthrough, I’ll show you how to construct OHLCV datasets and candlestick charts using **PyKX** and **Plotly**.
 
-### 🧪 Core Workflow
+### 📊 OHLCV Dataset creation
 
-- 📂 Upload a CSV file (tick-by-tick trade data) into an in-memory kdb+ table  
-- 🧱 Add auxiliar columns to help with dataset construction 
-- 🔍 Query the data (something we covered in a previous post)  
-- 📊 Group and aggregate using built-in operators like `first`, `max`, `min`, `last`  
-- 🧬 Integrate everything with your existing Python codebase. This one’s a game-changer if you're coming from a Python-heavy stack!
+- 📂 Upload a CSV file (tick-by-tick trade data) into an in-memory kdb+ table
+- 🧱 Add auxiliary columns to help with dataset construction (You’ll find this easy if you’re familiar with the `pandas`
+  library)
+- 🔍 Query the data (something we covered in a previous post)
+- 📊 Group and aggregate using built-in operators like `first`, `max`, `min`, `last` 
+- 🧬 Integrate everything with your existing Python codebase. This one’s a game-changer if you're coming from a
+  Python-heavy stack!
 
-
-## ✅ What You Need Before We Start
-
-- ✅ kdb+ and PyKX installed and working  
-- ✅ A sample CSV file with tick data (You can grab some from my GitHub repo if needed)
+### 🕯️Candlestick Chart creation
 
 
-## ⏭️ What’s Next?
-
-Next up: we'll jump into the code and start transforming raw tick data into meaningful, visual, and analytical insights. 🔧📉📈
-
-Stay tuned for the next post in this series—or better yet, subscribe so, you don’t miss it!
 
 
-Have questions or want the full code example? Drop a comment or connect with me on [LinkedIn](#) or [GitHub](#). Let's build something awesome together! 🙌
+
