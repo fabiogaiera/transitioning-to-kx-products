@@ -2,7 +2,7 @@ from datetime import date
 
 import pykx as kx
 
-db = kx.DB(path='/home/fabio/db1')
+db = kx.DB(path='/home/fabio/db')
 
 N = 1000000
 trades = kx.Table(data={
