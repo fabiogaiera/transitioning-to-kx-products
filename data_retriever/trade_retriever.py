@@ -59,6 +59,6 @@ See https://alpaca.markets to get an API key and its corresponding secret
 if __name__ == "__main__":
 
     if len(sys.argv) != 5:
-        print("Usage: python -m trade_retriever <symbol> <yyyy-MM-dd> <yyyy-MM-dd> </path/to/folder>")
+        print("Usage: python -m data_retriever.trade_retriever <symbol> <yyyy-MM-dd> <yyyy-MM-dd> </path/to/folder>")
         sys.exit(1)
     retrieve_trades_data(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
