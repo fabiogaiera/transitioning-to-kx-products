@@ -1,10 +1,12 @@
 # Transitioning to KX Products: Building OHLCV Datasets & Candlestick Charts 🕯️
 
-This post is a continuation of my previous write-up: [Creating an Intraday Trading Volume Histogram 📊](#)
+This post is a continuation of my previous
+write-up: [Creating an Intraday Trading Volume Histogram 📊](https://www.linkedin.com/pulse/transitioning-kx-products-creating-intraday-trading-volume-gaiera-c1lxf)
 
 Today, we’re diving into something simple yet incredibly powerful in the world of trading data: **OHLCV datasets**.
 
-Yes—**Open, High, Low, Close, Volume**. Basic, right? But don’t be fooled. These little columns unlock a ton of possibilities, from technical analysis to full-blown algorithmic strategy development.
+Yes—**Open, High, Low, Close, Volume**. Basic, right? But don’t be fooled. These little columns unlock a ton of
+possibilities, from technical analysis to full-blown algorithmic strategy development.
 
 ## 🧩 Why OHLCV Matters (More Than You Think)
 
@@ -59,16 +61,19 @@ In this walkthrough, I’ll show you how to construct OHLCV datasets and candles
 Here's what we’ll cover:
 
 - 📂 Upload a CSV file (tick-by-tick trade data) into an in-memory kdb+ table
-- 🧱 Add auxiliary columns to help with dataset construction (This will feel familiar if you’ve used the `pandas` library)
+- 🧱 Add auxiliary columns to help with dataset construction (This will feel familiar if you’ve used the `pandas`
+  library)
 - 🔍 Query the data (something we covered in a previous post)
 - 📊 Group and aggregate using built-in operators like `first`, `max`, `min`, and `last`
-- 🧬 Integrate everything with your existing Python codebase (Transform KX data types into a pandas DataFrame — a game-changer if you're coming from a Python-heavy stack!)
+- 🧬 Integrate everything with your existing Python codebase (Transform KX data types into a pandas DataFrame — a
+  game-changer if you're coming from a Python-heavy stack!)
 
 Translated to code:
 
 ```python
 # Import necessary libraries
 import pykx as kx
+
 
 # CSV format example:
 # timestamp,sym,price,size
@@ -93,8 +98,8 @@ def create_dataframe(csv_file_path, market_open_timespan, market_close_timespan)
     # Select trades executed during market hours
     market_hours_trades = trades.select(
         where=(
-            (kx.Column('timestamp') >= kx.Column('market_open')) &
-            (kx.Column('timestamp') <= kx.Column('market_close'))
+                (kx.Column('timestamp') >= kx.Column('market_open')) &
+                (kx.Column('timestamp') <= kx.Column('market_close'))
         )
     )
 
@@ -122,6 +127,7 @@ In this section, we’ll code entirely in Python (using the Plotly library) to c
 # candlestick_chart_script.py
 
 import plotly.graph_objects as go
+
 
 def create_candlestick_chart(df):
     fig = go.Figure(data=[
@@ -204,8 +210,9 @@ if __name__ == "__main__":
 
 ## GitHub Repository
 
-Here’s the link to the GitHub repository: [Candlestick Chart](#)
+Here’s the link to the GitHub repository: [Candlestick Chart](https://github.com/fabiogaiera/transitioning-to-kx-products/tree/master/candlestick_chart)
 
-If you prefer using kdb+/q instead of the PyKX library, I’ve created a dedicated package called `q`, which contains kdb+/q expressions invoked via `kx.q("kdb+/q code here")`.
+If you prefer using kdb+/q instead of the PyKX library, I’ve created a dedicated package called `q`, which contains
+kdb+/q expressions invoked via `kx.q("kdb+/q code here")`.
 
 Thanks for reading! Your feedback is much appreciated.
