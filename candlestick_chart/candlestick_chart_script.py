@@ -1,7 +1,9 @@
+# candlestick_chart_script.py
+
 import sys
 
-from candlestick_chart.python.ohlcv_dataset_creator import create_dataframe
 from candlestick_chart.candlestick_chart_creator import create_candlestick_chart
+from candlestick_chart.python.ohlcv_dataset_creator import create_dataframe
 
 """
 Usage in Linux / Mac:
