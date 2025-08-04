@@ -121,7 +121,7 @@ def create_dataframe(csv_file_path, market_open_timespan, market_close_timespan)
 
 ### 🕯️ Candlestick Chart Creation
 
-In this section, we’ll code entirely in Python (using the Plotly library) to create a candlestick chart:
+In this section, we’ll code the candlestick chart using the Plotly library: 
 
 ```python
 # candlestick_chart_script.py
