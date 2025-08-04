@@ -1,10 +1,12 @@
+# bid_ask_spread_df_creator.py
+
 import pykx as kx
 
 from bid_ask_spread.benchmark_util import log_execution_time
 
 """
 CSV format example for trades
-datetime,sym,price,size
+timestamp,sym,price,size
 2025.05.05D08:00:00.009039359,IBM,244.56,10
 2025.05.05D08:00:00.156501572,IBM,243,8
 2025.05.05D08:00:00.156579644,IBM,244.03,6
@@ -12,7 +14,7 @@ datetime,sym,price,size
 
 """
 CSV format example for quotes
-datetime,sym,bid_price,bid_size,ask_price,ask_size
+timestamp,sym,bid_price,bid_size,ask_price,ask_size
 2025.05.23D08:00:00.001037561,IBM,257.03,2,260.91,1
 2025.05.23D08:00:00.001062570,IBM,257.03,2,259.77,1
 2025.05.23D08:00:00.009487606,IBM,257.03,2,259.49,1
@@ -27,13 +29,13 @@ def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2, market_open, ma
     kx.q(f'quotes: ("PSFJFJ";enlist ",") 0: `$":{csv_file_path_2}"')
 
     # Key the quotes table
-    kx.q('quotes: `datetime`sym xkey quotes')
+    kx.q('quotes: `timestamp`sym xkey quotes')
 
     # As-Of Join between trades and quotes tables
-    kx.q('taq_table: aj[`sym`datetime;trades;quotes]')
+    kx.q('taq_table: aj[`sym`timestamp;trades;quotes]')
 
     # Filter TAQ data considering only market hours
-    kx.q(f'filtered_taq_table: select from taq_table where datetime within({market_open};{market_close})')
+    kx.q(f'filtered_taq_table: select from taq_table where timestamp within({market_open};{market_close})')
 
     # Calculate mid_price
     kx.q('filtered_taq_table: update mid_price: (bid_price + ask_price) % 2 from filtered_taq_table')

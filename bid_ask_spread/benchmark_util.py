@@ -1,3 +1,5 @@
+# benchmark_util.py
+
 import time
 
 
@@ -8,4 +10,5 @@ def log_execution_time(fn):
         end = time.perf_counter()
         print(f"{fn.__name__} took {end - start:.6f} seconds")
         return result
+
     return wrapper
