@@ -1,4 +1,4 @@
-# candlestick_chart_script.py
+# candlestick_chart_creator.py
 
 import plotly.graph_objects as go
 
