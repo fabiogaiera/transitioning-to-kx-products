@@ -20,8 +20,7 @@ Activate Virtual Environment (Windows):`.venv\Scripts\activate`
 
 Install Libraries: 
 
-`pip install requests`  
-`pip install pykx`  
+`pip install requests`   
 `pip install matplotlib`   
 `pip install seaborn`  
 `pip install plotly`  
@@ -37,6 +36,8 @@ If test isn't successful, execute
 ```bash
 sudo apt-get install python3-tk  
 ```
+
+For kdb+ and PyKX installation, check [KX.com](https://kx.com)
 
 **Alpaca Trading API Documentation (Required in case you want to download market data)**
 
