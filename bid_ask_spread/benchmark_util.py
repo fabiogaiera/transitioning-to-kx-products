@@ -2,6 +2,10 @@
 
 import time
 
+"""
+Usage: @log_execution_time in any function
+"""
+
 
 def log_execution_time(fn):
     def wrapper(*args, **kwargs):
