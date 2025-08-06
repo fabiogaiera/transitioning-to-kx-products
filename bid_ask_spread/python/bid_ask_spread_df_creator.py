@@ -39,36 +39,44 @@ def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2, market_open, ma
                            [kx.TimestampAtom, kx.SymbolAtom, kx.FloatAtom, kx.LongAtom, kx.FloatAtom, kx.LongAtom])
     logging.info("Ended quotes retrieval")
 
-    # Key the quotes table
-    logging.info("Started quotes keying")
-    quotes = kx.q.xkey(['sym', 'timestamp'], quotes)
-    logging.info("Ended quotes keying")
-
-    # As-Of Join between trades and quotes tables
-    logging.info("Started As-Of Join")
-    taq_table = kx.q.aj(kx.SymbolVector(['sym', 'timestamp']), trades, quotes)
-    logging.info("Ended As-Of Join")
-
-    # Filter TAQ data considering only market hours
-    logging.info("Started filtering by market hours")
-    filtered_taq_table = taq_table.select(
+    logging.info("Started filtering trades by market hours")
+    filtered_trades = trades.select(
         where=(
                 (kx.Column('timestamp') >= kx.q(market_open)) &
                 (kx.Column('timestamp') <= kx.q(market_close))
         )
     )
-    logging.info("Ended filtering by market hours")
+    logging.info("Ended filtering trades by market hours")
+
+    logging.info("Started filtering quotes by market hours")
+    filtered_quotes = quotes.select(
+        where=(
+                (kx.Column('timestamp') >= kx.q(market_open)) &
+                (kx.Column('timestamp') <= kx.q(market_close))
+        )
+    )
+    logging.info("Ended filtering quotes by market hours")
+
+    # Key the quotes table
+    logging.info("Started quotes keying")
+    filtered_quotes_keyed = kx.q.xkey(['sym', 'timestamp'], filtered_quotes)
+    logging.info("Ended quotes keying")
+
+    # As-Of Join between trades and quotes tables
+    logging.info("Started As-Of Join")
+    taq_table = kx.q.aj(kx.SymbolVector(['sym', 'timestamp']), filtered_trades, filtered_quotes_keyed)
+    logging.info("Ended As-Of Join")
 
     # Calculate mid_price
     logging.info("Started adding mid_price")
-    filtered_taq_table = filtered_taq_table.update(
+    taq_table = taq_table.update(
         kx.Column('mid_price',
                   value=((kx.Column('bid_price') + kx.Column('ask_price')) / 2)))
     logging.info("Ended adding mid_price")
 
     # Calculate Effective bid_ask_spread (Percentage Form)
     logging.info("Started adding bid_ask_spread")
-    filtered_taq_table = filtered_taq_table.update(
+    filtered_taq_table = taq_table.update(
         kx.Column('bid_ask_spread',
                   value=((2 * abs(kx.Column('price') - kx.Column('mid_price'))) / kx.Column('mid_price')) * 100)
     )
