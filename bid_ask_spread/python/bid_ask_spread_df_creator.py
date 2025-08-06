@@ -1,8 +1,8 @@
 # bid_ask_spread_df_creator.py
 
-import logging
-
 import pykx as kx
+
+from bid_ask_spread.benchmark_util import log_execution_time
 
 """
 CSV format example for trades
@@ -21,66 +21,46 @@ timestamp,sym,bid_price,bid_size,ask_price,ask_size
 2025.05.23D08:00:00.017576775,IBM,257.03,2,259.41,1
 """
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
 
-
+@log_execution_time
 def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2, market_open, market_close):
     # Upload CSV files into kdb+ tables
-    logging.info("Started trades retrieval")
+
     trades = kx.q.read.csv(csv_file_path_1,
                            [kx.TimestampAtom, kx.SymbolAtom, kx.FloatAtom, kx.LongAtom])
-    logging.info("Ended trades retrieval")
 
-    logging.info("Started quotes retrieval")
     quotes = kx.q.read.csv(csv_file_path_2,
                            [kx.TimestampAtom, kx.SymbolAtom, kx.FloatAtom, kx.LongAtom, kx.FloatAtom, kx.LongAtom])
-    logging.info("Ended quotes retrieval")
 
-    logging.info("Started filtering trades by market hours")
     filtered_trades = trades.select(
         where=(
                 (kx.Column('timestamp') >= kx.q(market_open)) &
                 (kx.Column('timestamp') <= kx.q(market_close))
         )
     )
-    logging.info("Ended filtering trades by market hours")
 
-    logging.info("Started filtering quotes by market hours")
     filtered_quotes = quotes.select(
         where=(
                 (kx.Column('timestamp') >= kx.q(market_open)) &
                 (kx.Column('timestamp') <= kx.q(market_close))
         )
     )
-    logging.info("Ended filtering quotes by market hours")
 
     # Key the quotes table
-    logging.info("Started quotes keying")
     filtered_quotes_keyed = kx.q.xkey(['sym', 'timestamp'], filtered_quotes)
-    logging.info("Ended quotes keying")
 
     # As-Of Join between trades and quotes tables
-    logging.info("Started As-Of Join")
     taq_table = kx.q.aj(kx.SymbolVector(['sym', 'timestamp']), filtered_trades, filtered_quotes_keyed)
-    logging.info("Ended As-Of Join")
 
     # Calculate mid_price
-    logging.info("Started adding mid_price")
     taq_table = taq_table.update(
-        kx.Column('mid_price',
-                  value=((kx.Column('bid_price') + kx.Column('ask_price')) / 2)))
-    logging.info("Ended adding mid_price")
+        kx.Column('mid_price', value=((kx.Column('bid_price') + kx.Column('ask_price')) / 2)))
 
     # Calculate Effective bid_ask_spread (Percentage Form)
-    logging.info("Started adding bid_ask_spread")
     filtered_taq_table = taq_table.update(
         kx.Column('bid_ask_spread',
                   value=((2 * abs(kx.Column('price') - kx.Column('mid_price'))) / kx.Column('mid_price')) * 100)
     )
-    logging.info("Ended adding bid_ask_spread")
 
     # Convert to pandas DataFrame
     return filtered_taq_table.pd()
