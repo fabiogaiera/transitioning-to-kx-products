@@ -28,21 +28,24 @@ def retrieve_bid_ask_spread_df(csv_file_path_1, csv_file_path_2, market_open, ma
     kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path_1}"')
     kx.q(f'quotes: ("PSFJFJ";enlist ",") 0: `$":{csv_file_path_2}"')
 
+    # Filter trades by market hours
+    kx.q(f'trades: select from trades where timestamp within({market_open};{market_close})')
+
+    # Filter quotes by market hours
+    kx.q(f'quotes: select from quotes where timestamp within({market_open};{market_close})')
+
     # Key the quotes table
     kx.q('quotes: `timestamp`sym xkey quotes')
 
     # As-Of Join between trades and quotes tables
     kx.q('taq_table: aj[`sym`timestamp;trades;quotes]')
 
-    # Filter TAQ data considering only market hours
-    kx.q(f'filtered_taq_table: select from taq_table where timestamp within({market_open};{market_close})')
-
     # Calculate mid_price
-    kx.q('filtered_taq_table: update mid_price: (bid_price + ask_price) % 2 from filtered_taq_table')
+    kx.q('taq_table: update mid_price: (bid_price + ask_price) % 2 from taq_table')
 
     # Calculate Effective bid_ask_spread (Percentage Form)
     filtered_taq_table = kx.q(
-        'update bid_ask_spread: 2 * (abs(price - mid_price) % mid_price) * 100 from filtered_taq_table')
+        'update bid_ask_spread: 2 * (abs(price - mid_price) % mid_price) * 100 from taq_table')
 
     # Convert to pandas DataFrame
     return filtered_taq_table.pd()
