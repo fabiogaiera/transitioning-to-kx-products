@@ -46,7 +46,7 @@ An **AS-OF JOIN** matches rows from two tables based on the closest **preceding 
 
 ## 🧪 Example: AS-OF JOIN Between Trades and Quotes
 
-### 🟦 Trades (1 row)
+### Trades (1 row)
 
 | timestamp           | sym  | price  | size |
 |---------------------|------|--------|------|
@@ -54,7 +54,7 @@ An **AS-OF JOIN** matches rows from two tables based on the closest **preceding 
 
 ---
 
-### 🟨 Quotes (3 rows)
+### Quotes (3 rows)
 
 | timestamp           | sym  | bid_price | bid_size | ask_price | ask_size |
 |---------------------|------|-----------|----------|-----------|----------|
@@ -64,7 +64,7 @@ An **AS-OF JOIN** matches rows from two tables based on the closest **preceding 
 
 ---
 
-### 🔁 AS-OF JOIN Result
+### AS-OF JOIN Result (1 row)
 
 We look for the quote with the **latest timestamp ≤ 2025-08-07 10:00:06**. That would be the quote at **10:00:05**.
 
