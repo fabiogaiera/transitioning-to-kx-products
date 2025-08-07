@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Permissions: Make sure that chmod +x script has been executed
+# Usage: ./script
+
+cd /home/fabio/source/transitioning-to-kx-products || { echo "Failed to change directory"; exit 1; }
+
+source .venv/bin/activate || { echo "Failed to activate virtual environment"; exit 1; }
+
+python -m candlestick_chart.candlestick_chart_script /home/fabio/data/IBM_trades.csv || { echo "Python script failed"; exit 1; }
+
+echo "Script completed successfully."
+
+exit 0
