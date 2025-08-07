@@ -4,7 +4,9 @@ This post continues from my previous
 write-up: [Building OHLCV Datasets & Candlestick Charts 🕯️](https://www.linkedin.com/pulse/transitioning-kx-products-building-ohlcv-datasets-charts-fabio-gaiera-hozzf)
 
 Today, we’re diving into more complex queries and arithmetic operations in **kdb+**. Until now, we’ve focused on
-selections and simple aggregations within a single table. But what happens when we need to correlate data across **multiple tables**? If you're familiar with SQL, you might recall operators like `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, and so on. In the
+selections and simple aggregations within a single table. But what happens when we need to correlate data across *
+*multiple tables**? If you're familiar with SQL, you might recall operators like `INNER JOIN`, `LEFT JOIN`,
+`RIGHT JOIN`, and so on. In the
 world of **Trades** and **Quotes** data, we introduce a particularly powerful concept: the **AS-OF JOIN** operator.
 
 ## 🔍 What is an AS-OF JOIN?
@@ -35,7 +37,8 @@ match.
 
 ## 🛠️ Where is AS-OF JOIN available?
 
-Most **RDBMS** and **NoSQL** systems do **not** offer native AS-OF JOIN functionality. However, **kdb+**, **ClickHouse**, and **QuestDB** provide **built-in support** for it.
+Most **RDBMS** and **NoSQL** systems do not offer native AS-OF JOIN functionality. However, **kdb+**, **ClickHouse**,
+and **QuestDB** provide built-in support for it.
 
 ## 🧪 Example: AS-OF JOIN Between Trades and Quotes
 
@@ -61,5 +64,99 @@ We look for the quote with the **latest timestamp ≤ 2025-08-07 10:00:06**. Tha
 |---------------------|------|-------------|------------|---------------------|-----------|----------|-----------|----------|
 | 2025-08-07 10:00:06 | AAPL | 200.75      | 150        | 2025-08-07 10:00:05 | 200.65    | 320      | 200.85    | 270      |
 
-Having created the TAQ (Trades And Quotes) dataset using the AS-OF JOIN, what's next? From the Quantitative Finance perspective, our aim in
-this article is to calculate the bid-ask spread during a day.   
+## 🤔 How can I use the TAQ dataset?
+
+Having created the TAQ (Trades And Quotes) dataset using the AS-OF JOIN, what's next? In this article, our aim is to
+calculate the bid-ask spread throughout a day.
+We won't enter in technical details of what is the bid-ask spread (There are several types of spreads), but briefly I
+can tell you that Quant Traders care about the Bid-Ask spread
+since it have impacts on:
+
+1. Trading costs
+2. Execution quality
+3. Strategy profitability
+
+🔼 High Bid-Ask Spread
+
+- The gap between bid and ask is large.
+- Example: Bid = $10.00, Ask = $10.50 → Spread = $0.50
+
+🔍 What it means:
+
+- Low liquidity (fewer buyers and sellers)
+- Higher uncertainty or volatility
+- Wider price disagreement between participants
+- Common in illiquid stocks, after-hours trading, or during market stress
+
+💥 Impact on trades:
+
+- Higher trading cost (you pay more to buy / get less when selling)
+- Harder to enter/exit positions without price impact
+- Bad for high-frequency or short-term strategies
+- May require limit orders to avoid overpaying
+
+🔽 Low Bid-Ask Spread
+
+- The gap between bid and ask is small.
+- Example: Bid = $10.00, Ask = $10.01 → Spread = $0.01
+
+🔍 What it means:
+
+- High liquidity
+- Tighter competition among buyers/sellers
+- Common in large-cap stocks, ETFs, and active markets
+
+💥 Impact on trades:
+
+- Lower trading cost
+- Easier to execute large or frequent trades
+- Ideal for algo trading, scalping, market making
+- Better price transparency and execution quality
+
+## 🙄 Too much theory so far? Time to get hands-on!
+
+Depending on your background (whether you’re close to or far from trading desks), you may find the above concepts
+relevant or irrelevant.
+Actually, if you’re a Quant Developer, you should know the basics. It will help you significantly on a daily basis.
+
+### Building the TAQ dataset
+
+The key part of this code is to understand how the AS-OF JOIN works. With kdb+ we simply do:
+
+```
+taq: aj[`sym`timestamp;trades;quotes]
+```
+
+Once we obtain the TAQ dataset, we proceed with arithmetic operations to calculate the (effective) bid-ask spread
+
+```
+taq: update mid_price: (bid_price + ask_price) % 2 from taq
+
+taq: update bid_ask_spread: 2 * (abs(price - mid_price) % mid_price) * 100 from taq
+```
+
+Beautiful, isn’t it? Getting comfortable with the terseness of kdb+?  
+Using PyKX instead (AS-OF JOIN followed by arithmetics to calculate bid-ask spread):
+
+```
+taq_table = kx.q.aj(kx.SymbolVector(['sym', 'timestamp']), filtered_trades, filtered_quotes_keyed)
+
+taq_table = taq_table.update(kx.Column('mid_price', value=((kx.Column('bid_price') + kx.Column('ask_price')) / 2)))
+
+taq_table = taq_table.update(kx.Column('bid_ask_spread', value=((2 * abs(kx.Column('price') - kx.Column('mid_price'))) / kx.Column('mid_price')) * 100))
+```
+
+ Now, let’s jump to the graphical stuff!
+
+### Building the Bid-Ask Spread Density Plot
+
+We're going to plot the Kernel Density Estimate (KDE) of the **bid_ask_spread** column from the TAQ dataset.
+
+- The X-axis (Effective Bid-Ask Spread) shows the cost of trading
+- The Y-axis (Density) shows how common each spread value is across your observations.
+
+## GitHub Repository
+
+Here’s the link to the GitHub repository: [Bid-Ask Spread](#)
+
+Grateful for your time and feedback — it helps me improve.
