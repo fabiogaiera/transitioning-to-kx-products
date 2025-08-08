@@ -18,6 +18,7 @@ def create_dataframe(csv_file_path, date, market_open, market_close):
 
     # Filter trades data by day
     # Our datetime field is timestamp data type, but we have to cast it to date for filtering
+    # Not really necessary this filtering
     intraday_trades = trades.select(
         where=(
                 (kx.Column('timestamp').cast('date')) == kx.q(date)
