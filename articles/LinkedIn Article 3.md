@@ -4,8 +4,7 @@ This post continues from my previous
 write-up: [Building OHLCV Datasets & Candlestick Charts 🕯️](https://www.linkedin.com/pulse/transitioning-kx-products-building-ohlcv-datasets-charts-fabio-gaiera-hozzf)
 
 Today, we’re diving into more complex queries and arithmetic operations in **kdb+**. Until now, we’ve focused on
-selections and simple aggregations within a single table. But what happens when we need to correlate data across *
-*multiple tables**? If you're familiar with SQL, you might recall operators like `INNER JOIN`, `LEFT JOIN`,
+selections and simple aggregations within a single table. But what happens when we need to correlate data across **multiple tables**? If you're familiar with SQL, you might recall operators like `INNER JOIN`, `LEFT JOIN`,
 `RIGHT JOIN`, and so on. In the
 world of **Trades** and **Quotes** data, we introduce a particularly powerful concept: the **AS-OF JOIN** operator.
 
@@ -25,7 +24,7 @@ match.
 - **Trades** occur at specific, discrete timestamps.
 - **Quotes** continuously update bid and ask prices at different timestamps.
 - To analyze market conditions at the time of a trade, we want to pair each trade with the **most recent quote**
-  available **at or before** that timestamp.
+  available at or before that timestamp.
 - Because quotes update asynchronously, **exact timestamp matches are rare**—which is why AS-OF JOIN is essential.
 
 ## 🆚 How does it differ from a standard JOIN?
@@ -33,14 +32,13 @@ match.
 | Standard JOIN                  | AS-OF JOIN                              |
 |--------------------------------|-----------------------------------------|
 | Requires exact timestamp match | Finds the most recent earlier timestamp |
-| Fails if timestamps differ     | Works even with asynchronous data       |
 
-## 🛠️ Where is AS-OF JOIN available?
+## 🛠️ Where is AS-OF JOIN operator available?
 
 Most **RDBMS** and **NoSQL** systems do not offer native AS-OF JOIN functionality. However, **kdb+**, **ClickHouse**,
 and **QuestDB** provide built-in support for it.
 
-## 🧪 Example: AS-OF JOIN Between Trades and Quotes
+## 🧪 Example: AS-OF JOIN between Trades and Quotes
 
 ### Trades (1 row)
 
@@ -78,7 +76,7 @@ since it have impacts on:
 
 🔼 High Bid-Ask Spread
 
-- The gap between bid and ask is large.
+- The gap between bid and ask is large
 - Example: Bid = $10.00, Ask = $10.50 → Spread = $0.50
 
 🔍 What it means:
@@ -97,7 +95,7 @@ since it have impacts on:
 
 🔽 Low Bid-Ask Spread
 
-- The gap between bid and ask is small.
+- The gap between bid and ask is small
 - Example: Bid = $10.00, Ask = $10.01 → Spread = $0.01
 
 🔍 What it means:
@@ -113,11 +111,7 @@ since it have impacts on:
 - Ideal for algo trading, scalping, market making
 - Better price transparency and execution quality
 
-## 🙄 Too much theory so far? Time to get hands-on!
-
-Depending on your background (whether you’re close to or far from trading desks), you may find the above concepts
-relevant or irrelevant.
-Actually, if you’re a Quant Developer, you should know the basics. It will help you significantly on a daily basis.
+## 🙄 Too much financial theory so far? Time to get hands-on!
 
 ### Building the TAQ dataset
 
@@ -127,7 +121,7 @@ The key part of this code is to understand how the AS-OF JOIN works. With kdb+ w
 taq: aj[`sym`timestamp;trades;quotes]
 ```
 
-Once we obtain the TAQ dataset, we proceed with arithmetic operations to calculate the (effective) bid-ask spread
+Once we obtain the TAQ dataset, we proceed with arithmetic operations to calculate the (effective) bid-ask spread:
 
 ```
 taq: update mid_price: (bid_price + ask_price) % 2 from taq
@@ -152,11 +146,16 @@ taq_table = taq_table.update(kx.Column('bid_ask_spread', value=((2 * abs(kx.Colu
 
 We're going to plot the Kernel Density Estimate (KDE) of the **bid_ask_spread** column from the TAQ dataset.
 
-- The X-axis (Effective Bid-Ask Spread) shows the cost of trading
-- The Y-axis (Density) shows how common each spread value is across your observations.
+- The X-axis, labeled Effective Bid-Ask Spread, represents the trading cost — in other words, the difference between the price buyers are willing to pay (bid) and the price sellers are asking for (ask).
+- The Y-axis, labeled Density, indicates how frequently each spread value occurs in the dataset. Higher peaks mean that the corresponding spread value is more common among the observed trades.
 
 ## GitHub Repository
 
-Here’s the link to the GitHub repository: [Bid-Ask Spread](#)
+Here’s the link to the GitHub repository: [Bid-Ask Spread](https://github.com/fabiogaiera/transitioning-to-kx-products/tree/master/bid_ask_spread)
+
+### Further Readings
+
+- [As-of join kdb+ Documentation](https://code.kx.com/q/ref/aj/)
+- [Bid-Ask Spread Wikipedia Article](https://en.wikipedia.org/wiki/Bid%E2%80%93ask_spread)
 
 Grateful for your time and feedback — it helps me improve.
